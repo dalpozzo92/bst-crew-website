@@ -1,0 +1,9 @@
+# robots.txt per BST Crew - Personal Trainer
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# TODO: Aggiornare "yourdomain.com" con il dominio reale
