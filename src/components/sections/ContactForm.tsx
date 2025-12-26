@@ -101,12 +101,12 @@ export function ContactForm() {
   }
 
   return (
-    <Card className="max-w-2xl mx-auto shadow-xl">
+    <Card className="max-w-2xl mx-auto bg-dark-900 border-white/[0.08]">
       <CardHeader>
-        <CardTitle className="text-2xl font-display">
+        <CardTitle className="text-2xl font-display text-white">
           Richiedi una Consulenza Gratuita
         </CardTitle>
-        <CardDescription className="text-base">
+        <CardDescription className="text-base text-gray-300">
           Compila il form e ti risponderò entro 24 ore. Tutti i campi sono obbligatori
           tranne il telefono.
         </CardDescription>
@@ -208,17 +208,17 @@ export function ContactForm() {
 
           {/* Success Message */}
           {formState.isSuccess && (
-            <div className="flex items-start space-x-3 p-4 bg-green-50 border border-green-200 rounded-lg">
-              <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-green-800">{formState.message}</p>
+            <div className="flex items-start space-x-3 p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+              <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-green-300">{formState.message}</p>
             </div>
           )}
 
           {/* Error Message */}
           {formState.isError && (
-            <div className="flex items-start space-x-3 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-red-800">{formState.message}</p>
+            <div className="flex items-start space-x-3 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+              <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-red-300">{formState.message}</p>
             </div>
           )}
 

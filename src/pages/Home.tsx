@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { SEO } from '@/components/common/SEO'
 import { Hero } from '@/components/sections/Hero'
-import { Services } from '@/components/sections/Services'
 import { WhyChooseMe } from '@/components/sections/WhyChooseMe'
 import { BookSection } from '@/components/sections/BookSection'
 import { InstagramSection } from '@/components/sections/InstagramSection'
@@ -16,8 +15,8 @@ import { getLocalBusinessSchema, generateSchemaScript } from '@/lib/schema-org'
  *
  * Struttura:
  * - Hero con H1 SEO e CTA
- * - Services preview
  * - Why Choose Me (4 benefit)
+ * - Book Section (libro gratuito)
  * - Instagram section
  * - Final CTA
  *
@@ -37,9 +36,6 @@ export function Home() {
 
       {/* Hero Section */}
       <Hero />
-
-      {/* Services Preview */}
-      <Services />
 
       {/* Why Choose Me */}
       <WhyChooseMe />

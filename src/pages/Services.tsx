@@ -3,6 +3,7 @@ import { Dumbbell, Laptop, Target, CheckCircle2, ArrowRight } from 'lucide-react
 import { SEO } from '@/components/common/SEO'
 import { AnimatedSection } from '@/components/common/AnimatedSection'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { seoConfig } from '@/lib/seo-config'
@@ -99,106 +100,102 @@ export function Services() {
       <SEO config={seoConfig.services} />
 
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-gray-50 to-primary-50/30">
+      <section className="section-padding">
         <div className="container-custom">
           <AnimatedSection className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 bg-primary-100 text-primary-700 hover:bg-primary-200">
+            <Badge className="mb-6 bg-primary-500/10 text-primary-500 hover:bg-primary-500/20 border-primary-500/20">
               Servizi Professionali
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6 tracking-tight">
               Servizi Personal Training
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
               Scegli il percorso più adatto alle tue esigenze. Ogni programma è
               personalizzato per massimizzare i tuoi risultati, che tu preferisca
-              allenarti in palestra a <strong>Pergine Valsugana</strong> o online
-              ovunque in <strong>Trentino</strong>.
+              allenarti in palestra a <span className="text-white font-normal">Pergine Valsugana</span> o online
+              ovunque in <span className="text-white font-normal">Trentino</span>.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
       {/* Services Detail */}
-      <section className="section-padding bg-white">
-        <div className="container-custom space-y-24">
+      <section className="section-padding">
+        <div className="container-custom space-y-16">
           {services.map((service, index) => {
             const Icon = service.icon
             const isEven = index % 2 === 0
 
             return (
               <AnimatedSection key={service.id} animation="fadeInUp">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                  {/* Image/Icon Side */}
-                  <div className={isEven ? 'lg:order-1' : 'lg:order-2'}>
-                    <div className={`relative w-full h-[400px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br ${service.color}`}>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Icon className="w-32 h-32 text-white opacity-30" />
+                <Card className="bg-dark-900 border-white/[0.08] overflow-hidden">
+                  <CardContent className="p-8 md:p-12">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                      {/* Image/Icon Side */}
+                      <div className={isEven ? 'lg:order-1' : 'lg:order-2'}>
+                        <div className={`relative w-full h-[400px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br ${service.color}`}>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <Icon className="w-32 h-32 text-white opacity-30" />
+                          </div>
+                        </div>
                       </div>
-                      {/* TODO: Sostituire con immagini reali del servizio */}
-                      <div className="absolute inset-0 flex items-end p-8">
-                        <div className="text-white">
-                          <p className="text-sm font-semibold opacity-90">
-                            Inserisci qui foto del servizio
-                          </p>
+
+                      {/* Content Side */}
+                      <div className={isEven ? 'lg:order-2' : 'lg:order-1'}>
+                        <div className="flex items-center space-x-3 mb-4">
+                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center`}>
+                            <Icon className="w-6 h-6 text-white" />
+                          </div>
+                          <h2 className="text-3xl md:text-4xl font-display font-bold text-white">
+                            {service.title}
+                          </h2>
+                        </div>
+
+                        <p className="text-lg text-primary-500 font-semibold mb-4">
+                          {service.subtitle}
+                        </p>
+
+                        <p className="text-gray-300 leading-relaxed mb-6">
+                          {service.description}
+                        </p>
+
+                        <Separator className="my-6 bg-white/[0.08]" />
+
+                        {/* Features */}
+                        <div className="mb-6">
+                          <h3 className="text-lg font-semibold text-white mb-4">
+                            Cosa Include:
+                          </h3>
+                          <div className="grid sm:grid-cols-2 gap-3">
+                            {service.features.map((feature, i) => (
+                              <div key={i} className="flex items-start">
+                                <CheckCircle2 className="w-5 h-5 text-primary-500 mr-2 flex-shrink-0 mt-0.5" />
+                                <span className="text-sm text-gray-300">{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <Separator className="my-6 bg-white/[0.08]" />
+
+                        {/* Ideal For */}
+                        <div className="mb-6">
+                          <h3 className="text-lg font-semibold text-white mb-4">
+                            Ideale Per:
+                          </h3>
+                          <ul className="space-y-2">
+                            {service.idealFor.map((item, i) => (
+                              <li key={i} className="flex items-start">
+                                <ArrowRight className="w-5 h-5 text-primary-500 mr-2 flex-shrink-0 mt-0.5" />
+                                <span className="text-sm text-gray-300">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Content Side */}
-                  <div className={isEven ? 'lg:order-2' : 'lg:order-1'}>
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center`}>
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                      <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900">
-                        {service.title}
-                      </h2>
-                    </div>
-
-                    <p className="text-lg text-primary-600 font-semibold mb-4">
-                      {service.subtitle}
-                    </p>
-
-                    <p className="text-gray-700 leading-relaxed mb-6">
-                      {service.description}
-                    </p>
-
-                    <Separator className="my-6" />
-
-                    {/* Features */}
-                    <div className="mb-6">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                        Cosa Include:
-                      </h3>
-                      <div className="grid sm:grid-cols-2 gap-3">
-                        {service.features.map((feature, i) => (
-                          <div key={i} className="flex items-start">
-                            <CheckCircle2 className="w-5 h-5 text-primary-500 mr-2 flex-shrink-0 mt-0.5" />
-                            <span className="text-sm text-gray-700">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <Separator className="my-6" />
-
-                    {/* Ideal For */}
-                    <div className="mb-6">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                        Ideale Per:
-                      </h3>
-                      <ul className="space-y-2">
-                        {service.idealFor.map((item, i) => (
-                          <li key={i} className="flex items-start">
-                            <ArrowRight className="w-5 h-5 text-primary-500 mr-2 flex-shrink-0 mt-0.5" />
-                            <span className="text-sm text-gray-700">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               </AnimatedSection>
             )
           })}
@@ -206,22 +203,24 @@ export function Services() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-primary-500 to-primary-700 text-white">
+      <section className="section-padding">
         <AnimatedSection className="container-custom text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
-            Non Sai Quale Servizio Scegliere?
-          </h2>
-          <p className="text-lg md:text-xl text-primary-50 mb-8 max-w-2xl mx-auto">
-            Contattami per una consulenza gratuita. Analizzeremo insieme i tuoi
-            obiettivi e troveremo il percorso perfetto per te.
-          </p>
-          <Button
-            asChild
-            size="xl"
-            className="bg-white text-primary-700 hover:bg-primary-50"
-          >
-            <Link to="/contatti">Richiedi Consulenza Gratuita</Link>
-          </Button>
+          <div className="max-w-3xl mx-auto bg-dark-900 border border-white/[0.08] rounded-2xl p-12 md:p-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-6">
+              Non Sai Quale Servizio Scegliere?
+            </h2>
+            <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+              Contattami per una consulenza gratuita. Analizzeremo insieme i tuoi
+              obiettivi e troveremo il percorso perfetto per te.
+            </p>
+            <Button
+              asChild
+              size="xl"
+              className="bg-primary-500/90 hover:bg-primary-500 text-dark-900"
+            >
+              <Link to="/contatti">Richiedi Consulenza Gratuita</Link>
+            </Button>
+          </div>
         </AnimatedSection>
       </section>
     </>

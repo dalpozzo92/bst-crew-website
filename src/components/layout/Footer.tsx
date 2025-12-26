@@ -134,6 +134,14 @@ export function Footer() {
             Personal Trainer a Pergine Valsugana e Trento
           </p>
         </div>
+                <Separator className="my-8 bg-gray-800" />
+
+        <div className="justify-between items-center space-y-4 sm:space-y-0">
+          <p className="text-xs text-gray-400">
+            Creato con ❤️ da Nicola Dal Pozzo - N LAB.
+          </p>
+         
+        </div>
       </div>
     </footer>
   )

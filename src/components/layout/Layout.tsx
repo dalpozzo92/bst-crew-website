@@ -26,9 +26,11 @@ export function Layout({ children }: LayoutProps) {
       {/* Animated lines background - optimized performance */}
       <AnimatedBackground
         variant="linee-move"
-        intensity="medium"
-        position="fixed"
-        speed={0.8}
+          intensity="light"
+          height="100%"
+          position="fixed"
+          speed={3}
+          fadeInDuration={2000}
       />
 
       {/* Content layer */}

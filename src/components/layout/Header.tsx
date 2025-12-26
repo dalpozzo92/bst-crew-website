@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu } from 'lucide-react'
-import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from '@/components/ui/dialog'
+import { Menu, X } from 'lucide-react'
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { InstagramIcon } from '@/components/common/InstagramIcon'
 import { cn } from '@/lib/utils'
@@ -15,7 +15,7 @@ const navigation: NavLink[] = [
   { label: 'Contatti', href: '/contatti' },
 ]
 
-/**
+/**npx sh
  * Header component con navigation e mobile menu
  *
  * Caratteristiche:
@@ -114,60 +114,85 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden">
-            <Dialog open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <DialogTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="Menu">
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Menu"
+                  className="text-gray-400 hover:text-white"
+                >
                   <Menu className="w-6 h-6" />
                 </Button>
-              </DialogTrigger>
-              <DialogContent className="w-full max-w-md bg-dark-900/95 backdrop-blur-xl border-white/[0.08]">
-                <DialogTitle className="sr-only">Menu di navigazione</DialogTitle>
-                <DialogDescription className="sr-only">
+              </SheetTrigger>
+              <SheetContent
+                side="right"
+                className="w-full sm:w-[400px] bg-dark-900/98 backdrop-blur-xl border-l border-white/[0.08] p-0"
+              >
+                <SheetTitle className="sr-only">Menu di navigazione</SheetTitle>
+                <SheetDescription className="sr-only">
                   Naviga tra le pagine del sito
-                </DialogDescription>
-                <div className="flex flex-col space-y-6 py-8">
-                  {/* Mobile Navigation */}
-                  <nav className="flex flex-col space-y-2">
+                </SheetDescription>
+
+                <div className="flex flex-col h-full">
+                  {/* Header del menu */}
+                  <div className="flex items-center justify-between p-6 border-b border-white/[0.08]">
+                    <Link to="/" onClick={() => setMobileMenuOpen(false)}>
+                      <img
+                        src={getAssetPath('/images/logo.png')}
+                        alt="BST Crew Logo"
+                        className="h-8 w-auto object-contain"
+                      />
+                    </Link>
+                  </div>
+
+                  {/* Navigation */}
+                  <nav className="flex-1 p-6 space-y-2">
                     {navigation.map((item) => (
                       <Link
                         key={item.href}
                         to={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
                         className={cn(
-                          'text-base font-medium transition-all duration-200 py-2.5 px-4 rounded-lg',
+                          'flex items-center justify-between text-lg font-medium transition-all duration-200 py-4 px-4 rounded-xl group',
                           isActive(item.href)
-                            ? 'text-white bg-white/[0.08]'
+                            ? 'text-white bg-primary-500/10 border border-primary-500/20'
                             : 'text-gray-400 hover:text-white hover:bg-white/[0.04]'
                         )}
                       >
-                        {item.label}
+                        <span>{item.label}</span>
+                        {isActive(item.href) && (
+                          <div className="w-2 h-2 rounded-full bg-primary-500"></div>
+                        )}
                       </Link>
                     ))}
                   </nav>
 
-                  {/* Mobile CTA */}
-                  <Button
-                    asChild
-                    size="lg"
-                    className="w-full bg-primary-500/90 hover:bg-primary-500 text-dark-900 font-medium rounded-lg"
-                  >
-                    <Link to="/contatti">Contattami</Link>
-                  </Button>
+                  {/* Footer del menu */}
+                  <div className="p-6 space-y-4 border-t border-white/[0.08]">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="w-full bg-primary-500/90 hover:bg-primary-500 text-dark-900 font-medium rounded-xl shadow-lg shadow-primary-500/20"
+                    >
+                      <Link to="/contatti" onClick={() => setMobileMenuOpen(false)}>
+                        Contattami
+                      </Link>
+                    </Button>
 
-                  {/* Mobile Social */}
-                  <div className="flex items-center justify-center pt-4">
                     <a
                       href={INSTAGRAM_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-white transition-all duration-200 flex items-center space-x-2"
+                      className="flex items-center justify-center space-x-2 text-gray-400 hover:text-white transition-all duration-200 py-3"
                     >
-                      <InstagramIcon className="w-4 h-4" />
-                      <span className="text-sm">Seguimi su Instagram</span>
+                      <InstagramIcon className="w-5 h-5" />
+                      <span className="text-sm font-medium">Seguimi su Instagram</span>
                     </a>
                   </div>
                 </div>
-              </DialogContent>
-            </Dialog>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </nav>
