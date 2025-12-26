@@ -11,9 +11,8 @@ export default defineConfig({
     },
   },
   // Configurazione per GitHub Pages
-  // Modifica 'base' con il nome del tuo repository: '/nome-repo/'
-  // Per dominio custom, usa: '/'
-  base: '/bst-crew-website/',
+  // Con dominio custom (bstcrew.it) usa '/'
+  base: '/',
   build: {
     outDir: 'dist',
     // Ottimizzazioni per performance
