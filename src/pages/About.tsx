@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { seoConfig } from '@/lib/seo-config'
 import { getPersonSchema, generateSchemaScript } from '@/lib/schema-org'
+import { getAssetPath } from '@/lib/assets'
 
 /**
  * About Page (Chi Sono)
@@ -60,7 +61,7 @@ export function About() {
             <AnimatedSection animation="fadeInLeft">
               <div className="relative w-full h-[600px] rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/images/hero-profile.jpg"
+                  src={getAssetPath('/images/hero-profile.jpg')}
                   alt="Personal Trainer BST Crew"
                   className="w-full h-full object-cover"
                 />

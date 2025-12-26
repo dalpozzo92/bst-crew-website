@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Dumbbell } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { getAssetPath } from '@/lib/assets'
 
 /**
  * Hero Section per la Home Page
@@ -20,7 +21,7 @@ export function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/home-profile.png"
+          src={getAssetPath('/images/home-profile.png')}
           alt="BST Crew Personal Trainer"
           className="w-full h-full object-cover"
         />
@@ -44,7 +45,7 @@ export function Hero() {
               className="mb-12"
             >
               <img
-                src="/images/logo.png"
+                src={getAssetPath('/images/logo.png')}
                 alt="BST Crew Logo"
                 className="h-20 md:h-24 lg:h-28 w-auto mx-auto object-contain"
               />

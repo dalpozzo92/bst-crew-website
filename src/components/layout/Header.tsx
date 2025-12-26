@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } 
 import { Button } from '@/components/ui/button'
 import { InstagramIcon } from '@/components/common/InstagramIcon'
 import { cn } from '@/lib/utils'
+import { getAssetPath } from '@/lib/assets'
 import { NavLink } from '@/types'
 
 const navigation: NavLink[] = [
@@ -64,7 +65,7 @@ export function Header() {
           {/* Logo - Nascosto nella homepage finché non si scrolla */}
           <Link to="/" className="flex items-center">
             <img
-              src="/images/logo.png"
+              src={getAssetPath('/images/logo.png')}
               alt="BST Crew Logo"
               className={cn(
                 "h-9 w-auto object-contain transition-opacity duration-300",
