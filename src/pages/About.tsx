@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Award, BookOpen, Target, Users } from 'lucide-react'
+import { Award, BookOpen, Target, Users, Microscope, Zap, UserCog } from 'lucide-react'
 import { SEO } from '@/components/common/SEO'
 import { AnimatedSection } from '@/components/common/AnimatedSection'
 import { Button } from '@/components/ui/button'
@@ -249,6 +249,74 @@ export function About() {
         </div>
       </section>
 
+      {/* Philosophy BST Crew Section */}
+      <section className="section-padding bg-gradient-to-b from-dark-800/30 to-transparent">
+        <div className="container-custom">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
+              La Filosofia BST Crew
+            </h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              Body Science & Technique non è solo un nome: è la mia visione del fitness.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {/* La Scienza */}
+            <AnimatedSection animation="fadeInUp" delay={0.1}>
+              <div className="bg-dark-900 border border-white/[0.08] rounded-2xl p-8 h-full">
+                <div className="w-16 h-16 bg-primary-500/10 rounded-2xl flex items-center justify-center mb-6">
+                  <Microscope className="w-8 h-8 text-primary-500" />
+                </div>
+                <h3 className="text-2xl font-display font-bold text-white mb-4">La Scienza</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Non mi accontento del <span className="text-white font-medium">"si è sempre fatto così"</span>. Voglio capire il <span className="text-white font-medium">perché</span> dietro ogni esercizio, ogni programma, ogni strategia. Solo con la scienza posso garantirti risultati veri, misurabili e duraturi.
+                </p>
+              </div>
+            </AnimatedSection>
+
+            {/* La Tecnica */}
+            <AnimatedSection animation="fadeInUp" delay={0.2}>
+              <div className="bg-dark-900 border border-white/[0.08] rounded-2xl p-8 h-full">
+                <div className="w-16 h-16 bg-primary-500/10 rounded-2xl flex items-center justify-center mb-6">
+                  <Zap className="w-8 h-8 text-primary-500" />
+                </div>
+                <h3 className="text-2xl font-display font-bold text-white mb-4">La Tecnica</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Attraverso la <span className="text-white font-medium">biomeccanica</span> ti insegno a muoverti in sintonia col tuo corpo, a sentire ogni muscolo lavorare nel modo giusto. Tecnica corretta significa <span className="text-white font-medium">risultati migliori, meno infortuni, più consapevolezza</span>.
+                </p>
+              </div>
+            </AnimatedSection>
+
+            {/* La Personalizzazione */}
+            <AnimatedSection animation="fadeInUp" delay={0.3}>
+              <div className="bg-dark-900 border border-white/[0.08] rounded-2xl p-8 h-full">
+                <div className="w-16 h-16 bg-primary-500/10 rounded-2xl flex items-center justify-center mb-6">
+                  <UserCog className="w-8 h-8 text-primary-500" />
+                </div>
+                <h3 className="text-2xl font-display font-bold text-white mb-4">La Personalizzazione</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Non esistono schede standard, diete copia-incolla o approcci universali. <span className="text-white font-medium">Tu sei unico</span>: il tuo corpo, i tuoi obiettivi, la tua vita meritano un percorso costruito su misura.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
+
+          {/* Conclusione */}
+          <AnimatedSection delay={0.4}>
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="bg-dark-900 border border-primary-500/20 rounded-2xl p-8 md:p-12">
+                <p className="text-xl md:text-2xl text-gray-200 leading-relaxed mb-6 font-light">
+                  BST Crew è tutto questo: <span className="text-primary-500 font-medium">scienza, tecnica e personalizzazione</span> al servizio della tua trasformazione.
+                </p>
+                <p className="text-lg text-gray-400 leading-relaxed">
+                  È il mio progetto, il mio modo di essere e di lavorare nel fitness. Ed è il metodo che mi ha permesso di trasformare centinaia di persone negli ultimi 10 anni.
+                </p>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="section-padding">
