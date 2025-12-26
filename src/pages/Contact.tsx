@@ -1,4 +1,4 @@
-import { Mail, MapPin, Clock } from 'lucide-react'
+import { MapPin, Clock } from 'lucide-react'
 import { InstagramIcon } from '@/components/common/InstagramIcon'
 import { SEO } from '@/components/common/SEO'
 import { ContactForm } from '@/components/sections/ContactForm'
@@ -18,7 +18,6 @@ import { seoConfig } from '@/lib/seo-config'
  */
 export function Contact() {
   const INSTAGRAM_URL = import.meta.env.VITE_INSTAGRAM_URL || 'https://instagram.com/bstcrew'
-  const EMAIL = import.meta.env.VITE_EMAIL || 'info@bstcrew.com'
 
   const contactInfo = [
     {
