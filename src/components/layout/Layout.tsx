@@ -13,7 +13,7 @@ interface LayoutProps {
  * Layout wrapper component
  *
  * Wrappa tutte le pagine con:
- * - Animated gradient background (ultra-modern)
+ * - Animated lines background (performant & modern)
  * - Header (navigation)
  * - Main content area con padding top per fixed header
  * - Footer
@@ -23,8 +23,13 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col relative bg-dark-900">
-      {/* Animated gradient background */}
-      <AnimatedBackground />
+      {/* Animated lines background - optimized performance */}
+      <AnimatedBackground
+        variant="linee-move"
+        intensity="medium"
+        position="fixed"
+        speed={0.8}
+      />
 
       {/* Content layer */}
       <div className="relative z-10 flex flex-col min-h-screen">
