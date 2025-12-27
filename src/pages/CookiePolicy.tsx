@@ -68,7 +68,7 @@ export function CookiePolicy() {
                       <Card key={index} className="hover:shadow-md transition-shadow">
                         <CardContent className="p-6">
                           <div className="flex items-start justify-between mb-2">
-                            <h3 className="text-lg font-semibold text-gray-900">
+                            <h3 className="text-lg font-semibold text-gray-300">
                               {cookie.name}
                             </h3>
                             {cookie.required ? (
@@ -274,7 +274,7 @@ export function CookiePolicy() {
                   </h2>
                   <p className="text-gray-700 leading-relaxed">
                     Per domande o richieste riguardo ai cookie, contattare:{' '}
-                    <strong>[EMAIL]</strong>
+                    <strong>dalpozzo92@gmail.com</strong>
                   </p>
                   <p className="text-gray-700 leading-relaxed mt-2">
                     Per informazioni sul trattamento dei dati personali, consultare la{' '}

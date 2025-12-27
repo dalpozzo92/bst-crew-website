@@ -19,7 +19,7 @@ import { useCookieConsent } from '@/hooks/useCookieConsent'
  * prima che l'utente dia il consenso esplicito (GDPR compliance)
  */
 export function CookieBanner() {
-  const { showBanner, acceptAll, acceptNecessary } = useCookieConsent()
+  const { showBanner, acceptNecessary } = useCookieConsent()
   const [showDetails, setShowDetails] = useState(false)
 
   if (!showBanner) return null

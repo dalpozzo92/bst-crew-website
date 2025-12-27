@@ -37,7 +37,7 @@ export function Privacy() {
                   <p className="text-gray-700 leading-relaxed">
                     La presente Privacy Policy descrive le modalità di trattamento dei
                     dati personali degli utenti che consultano il sito web{' '}
-                    <strong>BST Crew - Personal Trainer</strong> (di seguito "il Sito"),
+                    <strong>BST Crew - Personal Trainer</strong> www.bstcrew.it,
                     in conformità al Regolamento UE 2016/679 (GDPR).
                   </p>
                 </div>
@@ -51,13 +51,13 @@ export function Privacy() {
                   </h2>
                   <p className="text-gray-700 leading-relaxed">
                     {/* TODO: Sostituire con dati reali */}
-                    <strong>Titolare del Trattamento:</strong> [NOME COMPLETO]
+                    <strong>Titolare del Trattamento:</strong> Nicola Dal Pozzo
                     <br />
-                    <strong>Sede:</strong> [INDIRIZZO COMPLETO], Pergine Valsugana (TN)
+                    <strong>Sede:</strong> viale Vito Bellini 11, Pergine Valsugana (TN)
                     <br />
-                    <strong>Email:</strong> [EMAIL]
+                    <strong>Email:</strong> dalpozzo92@gmail.com
                     <br />
-                    <strong>Telefono:</strong> [TELEFONO]
+                    <strong>Telefono:</strong> 340 9455159
                   </p>
                 </div>
 
@@ -74,7 +74,7 @@ export function Privacy() {
                   <ul className="list-disc list-inside space-y-2 text-gray-700">
                     <li>
                       <strong>Dati forniti volontariamente:</strong> nome, cognome, email,
-                      telefono (opzionale), messaggio tramite form di contatto
+                      telefono, messaggio tramite form di contatto
                     </li>
                     <li>
                       <strong>Dati di navigazione:</strong> indirizzo IP, tipo di browser,
@@ -214,15 +214,7 @@ export function Privacy() {
                   </p>
                 </div>
 
-                {/* Note */}
-                <div className="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-lg">
-                  <p className="text-sm text-amber-800">
-                    <strong>⚠️ IMPORTANTE:</strong> Questo è un template generico. Prima di
-                    pubblicare il sito, è necessario personalizzare tutti i campi [PLACEHOLDER]
-                    con i dati reali e, se possibile, far revisionare il testo da un legale
-                    specializzato in privacy.
-                  </p>
-                </div>
+               
               </div>
             </div>
           </AnimatedSection>
