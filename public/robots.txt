@@ -1,9 +1,22 @@
-# robots.txt per BST Crew - Personal Trainer
-
+# robots.txt per bstcrew.it
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://bstcrew.it/sitemap.xml
 
-# TODO: Aggiornare "yourdomain.com" con il dominio reale
+# Blocca file di sistema
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /sitemap.xml
+
+# Consenti bot di ricerca principali
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

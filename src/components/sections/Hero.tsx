@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, Dumbbell } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { getAssetPath } from '@/lib/assets'
+import { StatCounter } from '@/components/common/StatCounter'
 
 /**
  * Hero Section per la Home Page
@@ -117,18 +118,9 @@ export function Hero() {
               transition={{ delay: 0.6, duration: 0.6 }}
               className="mt-20 grid grid-cols-3 gap-6 max-w-xl mx-auto"
             >
-              <div className="bg-white/[0.02] px-4 py-4 rounded-xl text-center border border-white/[0.05]">
-                <div className="text-3xl font-medium text-white mb-1">10+</div>
-                <div className="text-xs text-gray-500 font-normal">Anni Esperienza</div>
-              </div>
-              <div className="bg-white/[0.02] px-4 py-4 rounded-xl text-center border border-white/[0.05]">
-                <div className="text-3xl font-medium text-white mb-1">200+</div>
-                <div className="text-xs text-gray-500 font-normal">Clienti Soddisfatti</div>
-              </div>
-              <div className="bg-white/[0.02] px-4 py-4 rounded-xl text-center border border-white/[0.05]">
-                <div className="text-3xl font-medium text-white mb-1">100%</div>
-                <div className="text-xs text-gray-500 font-normal">Risultati</div>
-              </div>
+              <StatCounter end={10} suffix="+" label="Anni Esperienza" duration={2500} />
+              <StatCounter end={200} suffix="+" label="Clienti Soddisfatti" duration={2500} />
+              <StatCounter end={100} suffix="%" label="Risultati" duration={2000} />
             </motion.div>
           </motion.div>
         </div>

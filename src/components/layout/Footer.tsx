@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Mail } from 'lucide-react'
 import { InstagramIcon } from '@/components/common/InstagramIcon'
 import { Separator } from '@/components/ui/separator'
+import { getAssetPath } from '@/lib/assets'
 
 /**
  * Footer component con link, social e informazioni legali
@@ -24,16 +25,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
-                <span className="text-white font-display font-bold text-lg">BST</span>
-              </div>
-              <div>
-                <div className="font-display font-bold text-lg text-white">
-                  BST Crew
-                </div>
-                <div className="text-xs text-gray-400">Personal Trainer</div>
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <img
+                src={getAssetPath('/images/logo.png')}
+                alt="BST Crew Logo"
+                className="h-12 w-auto"
+              />
             </div>
             <p className="text-sm leading-relaxed text-gray-400 max-w-md">
               Personal Trainer specializzato in ipertrofia, dimagrimento e ricomposizione

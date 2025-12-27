@@ -6,6 +6,9 @@ import { Badge } from '@/components/ui/badge'
 import { seoConfig } from '@/lib/seo-config'
 import { getFAQSchema, personalTrainerPergineFAQ } from '@/lib/schema-org'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 /**
  * FAQ Page - Domande Frequenti
@@ -104,18 +107,26 @@ export function FAQ() {
               e fornirti tutte le informazioni di cui hai bisogno.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contatti"
-                className="inline-flex items-center justify-center px-8 py-3 bg-primary-500/90 hover:bg-primary-500 text-dark-900 font-medium rounded-lg transition-all duration-200"
+                 <Button
+                asChild
+                size="lg"
+                className="bg-primary-500/90 hover:bg-primary-500 text-dark-900 font-medium shadow-lg shadow-primary-500/10 rounded-xl transition-all duration-200"
               >
-                Contattami
-              </a>
-              <a
-                href="/servizi"
-                className="inline-flex items-center justify-center px-8 py-3 bg-white/[0.06] hover:bg-white/[0.10] text-white font-medium rounded-lg border border-white/[0.08] transition-all duration-200"
+                <Link to="/contatti" className="inline-flex items-center">
+                  Contattami Ora
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+             <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-white/10 bg-white/[0.02] text-gray-300 hover:text-white hover:bg-white/[0.05] rounded-xl font-medium transition-all duration-200"
               >
-                Scopri i Servizi
-              </a>
+                <Link to="/servizi">
+                  Scopri i Servizi
+                </Link>
+              </Button>
             </div>
           </div>
         </AnimatedSection>

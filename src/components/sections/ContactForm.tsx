@@ -161,7 +161,7 @@ export function ContactForm() {
 
           {/* Telefono */}
           <div className="space-y-2">
-            <Label htmlFor="phone">Telefono</Label>
+            <Label htmlFor="phone">Telefono *</Label>
             <Input
               id="phone"
               type="tel"

@@ -216,9 +216,11 @@ export function Services() {
             <Button
               asChild
               size="xl"
-              className="bg-primary-500/90 hover:bg-primary-500 text-dark-900"
+              className="bg-primary-500/90 hover:bg-primary-500 text-dark-900 w-full sm:w-auto"
             >
-              <Link to="/contatti">Richiedi Consulenza Gratuita</Link>
+              <Link to="/contatti" className="whitespace-nowrap sm:whitespace-normal">
+                Richiedi Consulenza Gratuita
+              </Link>
             </Button>
           </div>
         </AnimatedSection>

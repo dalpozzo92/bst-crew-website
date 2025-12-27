@@ -17,7 +17,7 @@ import { seoConfig } from '@/lib/seo-config'
  * - CTA principale
  */
 export function Contact() {
-  const INSTAGRAM_URL = import.meta.env.VITE_INSTAGRAM_URL || 'https://instagram.com/bstcrew'
+  const INSTAGRAM_URL = import.meta.env.VITE_INSTAGRAM_URL || 'https://www.instagram.com/crew.bst/'
 
   const contactInfo = [
     {
@@ -42,7 +42,7 @@ export function Contact() {
     {
       icon: Clock,
       title: 'Orari Consulenze',
-      content: 'Lun-Ven: 9:00-20:00',
+      content: 'Lun-Ven: 18:00-21:00',
       subtitle: 'Sabato: 9:00-14:00'
     }
   ]

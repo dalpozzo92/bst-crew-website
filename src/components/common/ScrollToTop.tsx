@@ -9,16 +9,27 @@ export function ScrollToTop() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    // Scroll immediato senza animazione
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant'
+    // Forza scroll multipli per assicurarsi che funzioni sempre
+    const scrollToTopImmediately = () => {
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    }
+
+    // Scroll immediato
+    scrollToTopImmediately()
+
+    // Scroll dopo il primo frame (assicura che il DOM sia renderizzato)
+    requestAnimationFrame(() => {
+      scrollToTopImmediately()
     })
 
-    // Fallback per browser meno recenti
-    document.documentElement.scrollTop = 0
-    document.body.scrollTop = 0
+    // Scroll ritardato come fallback finale (alcuni componenti animati potrebbero ritardare)
+    const timeoutId = setTimeout(() => {
+      scrollToTopImmediately()
+    }, 10)
+
+    return () => clearTimeout(timeoutId)
   }, [pathname])
 
   return null
