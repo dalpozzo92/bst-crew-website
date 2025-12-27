@@ -43,10 +43,13 @@ export function CookieBanner() {
             {/* Content */}
             <div className="flex-1">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Utilizzo dei Cookie
+                Informativa Cookie
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Questo sito utilizza cookie tecnici necessari per il suo funzionamento.
+                Questo sito utilizza <strong>solo cookie tecnici necessari</strong> per garantire
+                la sicurezza del form di contatto tramite <strong>hCaptcha</strong> (protezione anti-spam).
+                Questi cookie sono indispensabili per il funzionamento del sito e{' '}
+                <strong>non richiedono il tuo consenso</strong> secondo la normativa GDPR.
                 {!showDetails && (
                   <>
                     {' '}
@@ -69,18 +72,15 @@ export function CookieBanner() {
                     exit={{ height: 0, opacity: 0 }}
                     className="mt-3 overflow-hidden"
                   >
-                    <div className="text-sm text-gray-600 space-y-2">
+                    <div className="text-sm text-gray-600 space-y-2 bg-gray-50 p-4 rounded-lg">
                       <p>
-                        <strong>Cookie necessari:</strong> Indispensabili per il
-                        funzionamento del sito (sempre attivi).
+                        <strong>🔒 Cookie hCaptcha (Necessari):</strong> Utilizzati per proteggere
+                        il form di contatto da spam e bot. Sono sempre attivi e non raccolgono dati
+                        personali identificabili.
                       </p>
-                      <p>
-                        <strong>Cookie analitici:</strong> Ci aiutano a capire come
-                        viene utilizzato il sito per migliorare l'esperienza utente.
-                      </p>
-                      <p>
-                        <strong>Cookie di marketing:</strong> Utilizzati per mostrare
-                        contenuti pubblicitari personalizzati.
+                      <p className="text-xs text-gray-500 mt-2">
+                        <strong>Nota:</strong> Questo sito NON utilizza cookie di tracciamento,
+                        analytics (Google Analytics) o marketing. La tua privacy è protetta.
                       </p>
                     </div>
                   </motion.div>
@@ -109,16 +109,9 @@ export function CookieBanner() {
             <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
               <Button
                 onClick={acceptNecessary}
-                variant="outline"
-                className="w-full sm:w-auto"
-              >
-                Solo Necessari
-              </Button>
-              <Button
-                onClick={acceptAll}
                 className="w-full sm:w-auto bg-primary-500 hover:bg-primary-600"
               >
-                Accetta Tutti
+                Ho Capito
               </Button>
             </div>
           </div>

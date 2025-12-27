@@ -13,22 +13,11 @@ import { seoConfig } from '@/lib/seo-config'
 export function CookiePolicy() {
   const cookieTypes = [
     {
-      name: 'Cookie Tecnici',
-      description: 'Cookie strettamente necessari per il funzionamento del sito. Non richiedono consenso.',
-      duration: 'Sessione o 1 anno',
-      required: true
-    },
-    {
-      name: 'Cookie Analitici',
-      description: 'Raccolgono informazioni su come i visitatori utilizzano il sito (es. Google Analytics). Richiedono consenso.',
-      duration: '2 anni',
-      required: false
-    },
-    {
-      name: 'Cookie di Marketing',
-      description: 'Utilizzati per mostrare pubblicità personalizzate (es. Meta Pixel). Richiedono consenso.',
-      duration: '1-2 anni',
-      required: false
+      name: 'Cookie Tecnici Necessari (hCaptcha)',
+      description: 'Cookie utilizzati per proteggere il form di contatto da spam e bot tramite hCaptcha. Sono indispensabili per la sicurezza del sito e non raccolgono dati personali identificabili.',
+      duration: 'Sessione',
+      required: true,
+      provider: 'hCaptcha (Intuition Machines, Inc.)'
     }
   ]
 
@@ -109,81 +98,94 @@ export function CookiePolicy() {
                 {/* Cookie Tecnici */}
                 <div>
                   <h2 className="text-2xl font-display font-bold text-gray-900 mb-4">
-                    3. Cookie Tecnici (Sempre Attivi)
+                    3. Cookie hCaptcha (Sempre Attivi)
                   </h2>
                   <p className="text-gray-700 leading-relaxed mb-4">
-                    Il sito utilizza cookie tecnici necessari per:
-                  </p>
-                  <ul className="list-disc list-inside space-y-2 text-gray-700">
-                    <li>Memorizzare le preferenze di consenso cookie</li>
-                    <li>Gestire la sessione di navigazione</li>
-                    <li>Garantire il corretto funzionamento del sito</li>
-                  </ul>
-                  <p className="text-gray-700 leading-relaxed mt-4">
-                    <strong>Questi cookie non richiedono consenso</strong> in quanto
-                    strettamente necessari per il funzionamento del sito (art. 122 del
-                    Codice Privacy).
-                  </p>
-                </div>
-
-                <Separator />
-
-                {/* Cookie di Terze Parti */}
-                <div>
-                  <h2 className="text-2xl font-display font-bold text-gray-900 mb-4">
-                    4. Cookie di Terze Parti (Solo con Consenso)
-                  </h2>
-                  <p className="text-gray-700 leading-relaxed mb-4">
-                    Il sito può utilizzare, previo consenso dell'utente, cookie di terze
-                    parti per le seguenti finalità:
+                    Il sito utilizza <strong>hCaptcha</strong>, un servizio di protezione anti-spam
+                    fornito da Intuition Machines, Inc., per proteggere il form di contatto da bot
+                    e accessi automatizzati dannosi.
                   </p>
 
                   <div className="space-y-4 text-gray-700">
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">
-                        Google Analytics (Cookie Analitici)
+                        Finalità
                       </h3>
                       <p className="text-sm leading-relaxed">
-                        Servizio di analisi web fornito da Google per raccogliere statistiche
-                        anonime sull'utilizzo del sito. I dati sono anonimizzati e aggregati.
-                        <br />
-                        <a
-                          href="https://policies.google.com/privacy"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary-600 hover:underline"
-                        >
-                          Privacy Policy Google Analytics
-                        </a>
+                        hCaptcha è utilizzato esclusivamente per:
+                      </p>
+                      <ul className="list-disc list-inside space-y-1 text-sm mt-2">
+                        <li>Proteggere il form di contatto da spam e bot</li>
+                        <li>Verificare che l'utente sia umano e non un robot</li>
+                        <li>Garantire la sicurezza del sito</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">
+                        Dati Raccolti
+                      </h3>
+                      <p className="text-sm leading-relaxed">
+                        hCaptcha può raccogliere informazioni tecniche non identificabili come:
+                      </p>
+                      <ul className="list-disc list-inside space-y-1 text-sm mt-2">
+                        <li>Indirizzo IP (anonimizzato)</li>
+                        <li>User-agent del browser</li>
+                        <li>Interazioni con il widget captcha</li>
+                      </ul>
+                      <p className="text-sm leading-relaxed mt-2">
+                        <strong>Nota:</strong> hCaptcha NON raccoglie dati personali identificabili
+                        né crea profili utente per scopi pubblicitari.
                       </p>
                     </div>
 
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">
-                        Meta Pixel (Cookie di Marketing)
+                        Base Giuridica
                       </h3>
                       <p className="text-sm leading-relaxed">
-                        Strumento di analisi e remarketing fornito da Meta/Facebook per
-                        tracciare le conversioni e mostrare pubblicità personalizzate.
+                        I cookie hCaptcha sono considerati <strong>cookie tecnici necessari</strong>{' '}
+                        ai sensi dell'art. 122 del Codice Privacy e dell'art. 5(3) della Direttiva
+                        ePrivacy. <strong>Non richiedono consenso esplicito</strong> in quanto
+                        indispensabili per proteggere il servizio di contatto da abusi.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">
+                        Privacy Policy hCaptcha
+                      </h3>
+                      <p className="text-sm leading-relaxed">
+                        Per maggiori informazioni sul trattamento dei dati da parte di hCaptcha:
                         <br />
                         <a
-                          href="https://www.facebook.com/privacy/policy/"
+                          href="https://www.hcaptcha.com/privacy"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-primary-600 hover:underline"
                         >
-                          Privacy Policy Meta
+                          Privacy Policy hCaptcha
                         </a>
                       </p>
                     </div>
                   </div>
+                </div>
 
-                  <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p className="text-sm text-blue-900">
-                      ℹ️ <strong>Nota:</strong> Attualmente il sito non ha attivato
-                      cookie analitici o di marketing. Questi verranno attivati solo
-                      dopo aver ottenuto il tuo consenso esplicito tramite il banner
-                      cookie.
+                <Separator />
+
+                {/* No Analytics/Marketing */}
+                <div>
+                  <h2 className="text-2xl font-display font-bold text-gray-900 mb-4">
+                    4. Cookie Analitici e di Marketing
+                  </h2>
+                  <div className="p-6 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-green-900 leading-relaxed">
+                      ✅ <strong>Questo sito NON utilizza cookie di tracciamento.</strong>
+                    </p>
+                    <p className="text-sm text-green-800 mt-2 leading-relaxed">
+                      Non utilizziamo Google Analytics, Meta Pixel, o qualsiasi altro servizio
+                      di analisi o marketing. La tua privacy è protetta e non viene tracciata
+                      alcuna attività di navigazione.
                     </p>
                   </div>
                 </div>
@@ -196,20 +198,25 @@ export function CookiePolicy() {
                     5. Come Gestire i Cookie
                   </h2>
                   <p className="text-gray-700 leading-relaxed mb-4">
-                    Puoi gestire le tue preferenze sui cookie in qualsiasi momento:
+                    Poiché questo sito utilizza <strong>solo cookie tecnici necessari</strong>{' '}
+                    (hCaptcha) che non richiedono consenso, non è presente un sistema di gestione
+                    preferenze cookie. Tuttavia, puoi sempre bloccare i cookie tramite le impostazioni
+                    del tuo browser.
                   </p>
 
-                  <ul className="list-disc list-inside space-y-2 text-gray-700">
-                    <li>
-                      <strong>Tramite il banner cookie:</strong> Alla prima visita puoi
-                      scegliere se accettare tutti i cookie o solo quelli necessari
-                    </li>
-                    <li>
-                      <strong>Tramite le impostazioni del browser:</strong> Tutti i browser
-                      permettono di bloccare o eliminare i cookie. Consulta la guida del
-                      tuo browser per maggiori informazioni
-                    </li>
-                  </ul>
+                  <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg mb-4">
+                    <p className="text-sm text-amber-900">
+                      ⚠️ <strong>Attenzione:</strong> Bloccare i cookie hCaptcha impedirà il
+                      funzionamento del form di contatto, poiché il sistema anti-spam non potrà
+                      verificare che tu sia un utente umano.
+                    </p>
+                  </div>
+
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    <strong>Tramite le impostazioni del browser:</strong> Tutti i browser
+                    permettono di bloccare o eliminare i cookie. Consulta la guida del
+                    tuo browser per maggiori informazioni:
+                  </p>
 
                   <div className="mt-6 space-y-2 text-sm text-gray-600">
                     <p>Guide per i browser più comuni:</p>
@@ -255,13 +262,6 @@ export function CookiePolicy() {
                         </a>
                       </li>
                     </ul>
-                  </div>
-
-                  <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                    <p className="text-sm text-amber-900">
-                      ⚠️ <strong>Attenzione:</strong> Disabilitare i cookie tecnici
-                      potrebbe impedire il corretto funzionamento del sito.
-                    </p>
                   </div>
                 </div>
 
