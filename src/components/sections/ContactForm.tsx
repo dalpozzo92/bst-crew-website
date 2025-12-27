@@ -107,8 +107,7 @@ export function ContactForm() {
           Richiedi una Consulenza Gratuita
         </CardTitle>
         <CardDescription className="text-base text-gray-300">
-          Compila il form e ti risponderò entro 24 ore. Tutti i campi sono obbligatori
-          tranne il telefono.
+          Compila il form e ti risponderò entro 24 ore. Tutti i campi sono obbligatori.
         </CardDescription>
       </CardHeader>
 
@@ -160,14 +159,20 @@ export function ContactForm() {
             )}
           </div>
 
-          {/* Telefono (opzionale) */}
+          {/* Telefono */}
           <div className="space-y-2">
-            <Label htmlFor="phone">Telefono (opzionale)</Label>
+            <Label htmlFor="phone">Telefono</Label>
             <Input
               id="phone"
               type="tel"
               placeholder="+39 xxx xxxxxxx"
-              {...register('phone')}
+              {...register('phone', {
+                required: 'Il telefono è obbligatorio',
+                pattern: {
+                  value: /^\+?([0-9]{2,3})\s?([0-9]{3,4})\s?([0-9]{3,4})$/,
+                  message: 'Inserisci un numero di telefono valido'
+                }
+              })}
             />
           </div>
 

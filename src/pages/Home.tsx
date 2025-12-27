@@ -75,8 +75,8 @@ export function Home() {
                 variant="outline"
                 className="border-white/10 bg-white/[0.02] text-gray-300 hover:text-white hover:bg-white/[0.05] rounded-xl font-medium transition-all duration-200"
               >
-                <Link to="/personal-trainer-pergine-valsugana">
-                  Scopri di Più
+                <Link to="/FAQ">
+                  Leggi le FAQ
                 </Link>
               </Button>
             </div>

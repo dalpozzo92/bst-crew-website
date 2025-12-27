@@ -7,6 +7,7 @@ import { Home } from '@/pages/Home'
 import { About } from '@/pages/About'
 import { Services } from '@/pages/Services'
 import { Contact } from '@/pages/Contact'
+import { FAQ } from '@/pages/FAQ'
 import { PersonalTrainerPergine } from '@/pages/PersonalTrainerPergine'
 import { Privacy } from '@/pages/Privacy'
 import { CookiePolicy } from '@/pages/CookiePolicy'
@@ -24,6 +25,7 @@ import { CookiePolicy } from '@/pages/CookiePolicy'
  * - /chi-sono - About
  * - /servizi - Services
  * - /contatti - Contact
+ * - /faq - FAQ
  * - /personal-trainer-pergine-valsugana - Landing SEO
  * - /privacy - Privacy Policy
  * - /cookie-policy - Cookie Policy
@@ -43,6 +45,7 @@ function App() {
             <Route path="/chi-sono" element={<About />} />
             <Route path="/servizi" element={<Services />} />
             <Route path="/contatti" element={<Contact />} />
+            <Route path="/faq" element={<FAQ />} />
             <Route
               path="/personal-trainer-pergine-valsugana"
               element={<PersonalTrainerPergine />}

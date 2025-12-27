@@ -9,7 +9,16 @@ export function ScrollToTop() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // Scroll immediato senza animazione
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant'
+    })
+
+    // Fallback per browser meno recenti
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
   }, [pathname])
 
   return null
