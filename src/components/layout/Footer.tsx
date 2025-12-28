@@ -87,6 +87,22 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  to="/trasformazioni"
+                  className="text-sm hover:text-primary-400 transition-colors"
+                >
+                  Trasformazioni
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/faq"
+                  className="text-sm hover:text-primary-400 transition-colors"
+                >
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/contatti"
                   className="text-sm hover:text-primary-400 transition-colors"
                 >

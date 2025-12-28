@@ -12,6 +12,7 @@ const navigation: NavLink[] = [
   { label: 'Home', href: '/' },
   { label: 'Chi Sono', href: '/chi-sono' },
   { label: 'Servizi', href: '/servizi' },
+  { label: 'Trasformazioni', href: '/trasformazioni' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contatti', href: '/contatti' },
 ]

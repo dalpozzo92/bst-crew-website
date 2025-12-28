@@ -52,24 +52,35 @@ export function Hero() {
               />
             </motion.div>
 
-            
+            {/* Nome */}
+            <div className="mb-4">
+              <p className="text-sm md:text-base font-light tracking-[0.2em] uppercase text-gray-400">
+                Nicola Dal Pozzo
+              </p>
+            </div>
 
             {/* H1 - SEO Ottimizzato */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-[1.08] mb-6 tracking-tight">
-              Personal Trainer a{' '}
-              <span className="text-primary-500/90">
-                Pergine Valsugana
-              </span>{' '}
-              e Trento
+            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.05] mb-3 tracking-tight">
+              Personal Trainer
             </h1>
 
+            {/* Location */}
+            <div className="mb-10">
+              <p className="text-xl md:text-2xl lg:text-3xl font-light text-gray-300">
+                Pergine Valsugana{' '}
+                <span className="text-primary-500/80">·</span>{' '}
+                Trento{' '}
+                <span className="text-primary-500/80">·</span>{' '}
+                Online
+              </p>
+            </div>
+
             {/* Subtitle - Value Proposition */}
-            <p className="text-lg md:text-xl text-gray-400 leading-relaxed mb-10 max-w-2xl mx-auto font-light">
+            <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-10 max-w-2xl mx-auto font-light">
               Coaching personalizzato per{' '}
               <span className="text-gray-200 font-normal">massa muscolare</span>,{' '}
               <span className="text-gray-200 font-normal">dimagrimento</span> e{' '}
-              <span className="text-gray-200 font-normal">ricomposizione corporea</span>.
-              Allenamenti in palestra a Pergine Valsugana e Trento. Online in tutta Italia.
+              <span className="text-gray-200 font-normal">ricomposizione corporea</span>
             </p>
 
             {/* Badge */}

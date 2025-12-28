@@ -1,4 +1,4 @@
-import { Brain, LineChart, MapPin, Trophy } from 'lucide-react'
+import { Brain, LineChart, Sparkles, Trophy } from 'lucide-react'
 import { AnimatedSection } from '@/components/common/AnimatedSection'
 
 const benefits = [
@@ -15,7 +15,7 @@ const benefits = [
   {
     title: 'Flessibilità Totale',
     description: 'Allenamenti in palestra a Pergine Valsugana o coaching online ovunque. Scegli la modalità più adatta al tuo stile di vita.',
-    icon: MapPin
+    icon: Sparkles
   },
   {
     title: 'Risultati Misurabili',

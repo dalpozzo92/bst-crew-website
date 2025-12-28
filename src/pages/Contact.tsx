@@ -22,9 +22,9 @@ export function Contact() {
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Area',
-      content: 'Pergine Valsugana, Trento e tutto il Trentino-Alto Adige',
-      subtitle: 'Personal training in palestra a Pergine + coaching online'
+      title: 'Area di Servizio',
+      content: 'Pergine Valsugana, Trento, Levico Terme, Caldonazzo, Rovereto',
+      subtitle: 'Allenamenti in palestra a Pergine e Trento · Coaching online in tutta Italia'
     },
     // {
     //   icon: Mail,
@@ -70,16 +70,16 @@ export function Contact() {
       {/* Contact Form + Info */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Form (2 columns) */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 w-full mx-auto max-w-3xl lg:max-w-none">
               <AnimatedSection animation="fadeInLeft">
                 <ContactForm />
               </AnimatedSection>
             </div>
 
             {/* Contact Info Sidebar (1 column) */}
-            <div className="space-y-6">
+            <div className="space-y-6 w-full mx-auto max-w-3xl lg:max-w-none">
               <AnimatedSection animation="fadeInRight">
                 <h2 className="text-2xl font-display font-bold text-white mb-6">
                   Informazioni di Contatto
@@ -129,13 +129,14 @@ export function Contact() {
                 {/* Additional Info */}
                 <div className="mt-8 p-6 bg-dark-900 rounded-xl border border-white/[0.08]">
                   <h3 className="font-semibold text-white mb-3">
-                    📍 Dove mi trovo
+                    📍 Dove Opero
                   </h3>
                   <p className="text-sm text-gray-300 leading-relaxed">
-                    Collaboro con una palestra attrezzata a{' '}
-                    <strong className="text-white">Pergine Valsugana (TN)</strong>. Per chi non può raggiungere
-                    la palestra, offro servizi di <strong className="text-white">coaching online</strong> in
-                    tutto il Trentino e oltre.
+                    Collaboro con palestre attrezzate a{' '}
+                    <strong className="text-white">Pergine Valsugana</strong> e{' '}
+                    <strong className="text-white">Trento</strong>. Per chi preferisce allenarsi
+                    in autonomia o non può raggiungere la palestra, offro servizi di{' '}
+                    <strong className="text-white">coaching online</strong> in tutta Italia.
                   </p>
                 </div>
 
@@ -152,33 +153,6 @@ export function Contact() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Map Section (Optional - Placeholder) */}
-      <section className="section-padding">
-        <AnimatedSection className="container-custom">
-          <div className="bg-dark-900 border border-white/[0.08] rounded-2xl p-8 text-center">
-            <h2 className="text-2xl font-display font-bold text-white mb-4">
-              Pergine Valsugana, Provincia di Trento
-            </h2>
-            <p className="text-gray-300 mb-6">
-              Servizio di personal training in palestra e coaching online per tutto
-              il Trentino-Alto Adige.
-            </p>
-            <div className="w-full h-96 bg-dark-800 rounded-xl overflow-hidden border border-white/[0.04]">
-              <iframe
-                src="https://maps.google.com/maps?q=46.0695931,11.2215075&hl=it&z=15&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Mappa Palestra Fuerza - Pergine Valsugana"
-              />
-            </div>
-          </div>
-        </AnimatedSection>
       </section>
     </>
   )

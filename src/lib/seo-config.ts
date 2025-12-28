@@ -62,6 +62,21 @@ export const seoConfig: Record<string, SEOConfig> = {
     ]
   },
 
+  transformations: {
+    title: 'Trasformazioni Prima e Dopo | Risultati Reali BST Crew',
+    description: 'Scopri le trasformazioni reali ottenute dai clienti BST Crew. Risultati concreti con metodo scientifico, programmi personalizzati e supporto continuo a Pergine Valsugana e Trento.',
+    canonical: `${SITE_URL}/trasformazioni`,
+    ogType: 'website',
+    keywords: [
+      'trasformazioni fitness',
+      'risultati personal trainer Pergine',
+      'prima e dopo palestra',
+      'trasformazioni fisiche Trento',
+      'risultati ipertrofia',
+      'dimagrimento risultati Pergine'
+    ]
+  },
+
   personalTrainerPergine: {
     title: 'Personal Trainer a Pergine Valsugana: Trasforma il Tuo Fisico | BST Crew',
     description: 'Cerchi un personal trainer a Pergine Valsugana o Trento? Allenamenti personalizzati per ipertrofia, dimagrimento e ricomposizione corporea. Servizi in palestra e online.',
