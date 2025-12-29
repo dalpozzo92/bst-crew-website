@@ -176,7 +176,13 @@ export function ContactForm() {
                   message: 'Inserisci un numero di telefono valido'
                 }
               })}
+             className={errors.email ? 'border-red-500' : ''}
             />
+            {errors.email && (
+              <p className="text-sm text-red-600" role="alert">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
           {/* Messaggio */}
