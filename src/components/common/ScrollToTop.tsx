@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom'
  * Fix per mobile: disabilita temporaneamente scroll-behavior: smooth per scroll istantaneo
  */
 export function ScrollToTop() {
-  const { pathname } = useLocation()
+  const location = useLocation()
 
   useEffect(() => {
     // Salva lo scroll behavior originale
@@ -31,20 +31,25 @@ export function ScrollToTop() {
     // Scroll dopo il primo frame (assicura che il DOM sia renderizzato)
     requestAnimationFrame(() => {
       scrollToTopImmediately()
+
+      // Secondo frame per essere sicuri
+      requestAnimationFrame(() => {
+        scrollToTopImmediately()
+      })
     })
 
     // Scroll ritardato come fallback finale per mobile (alcuni componenti animati potrebbero ritardare)
     const timeoutId = setTimeout(() => {
       scrollToTopImmediately()
 
-      // Ripristina lo scroll behavior dopo 100ms
+      // Ripristina lo scroll behavior dopo 150ms
       setTimeout(() => {
         htmlElement.style.scrollBehavior = originalScrollBehavior
-      }, 100)
-    }, 50)
+      }, 150)
+    }, 100)
 
     return () => clearTimeout(timeoutId)
-  }, [pathname])
+  }, [location.pathname, location.key]) // Usa location.key per catturare anche navigazione avanti/indietro
 
   return null
 }

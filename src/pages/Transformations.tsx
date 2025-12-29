@@ -71,6 +71,9 @@ export function Transformations() {
   // Auto-scroll infinito per la galleria
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [isPaused, setIsPaused] = useState(false)
+  const touchStartX = useRef<number>(0)
+  const isUserScrolling = useRef<boolean>(false)
+  const pauseTimeoutRef = useRef<number | null>(null)
 
   useEffect(() => {
     const container = scrollContainerRef.current
@@ -80,7 +83,7 @@ export function Transformations() {
     let animationFrameId: number
 
     const scroll = () => {
-      if (!isPaused && container) {
+      if (!isPaused && !isUserScrolling.current && container) {
         container.scrollLeft += scrollSpeed
 
         // Reset allo scroll quando arriva alla metà (dove finiscono le immagini originali)
@@ -94,8 +97,40 @@ export function Transformations() {
 
     animationFrameId = requestAnimationFrame(scroll)
 
-    return () => cancelAnimationFrame(animationFrameId)
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      if (pauseTimeoutRef.current) {
+        clearTimeout(pauseTimeoutRef.current)
+      }
+    }
   }, [isPaused])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+    isUserScrolling.current = false
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const touchCurrentX = e.touches[0].clientX
+    const diff = Math.abs(touchCurrentX - touchStartX.current)
+
+    // Se l'utente ha mosso il dito di almeno 10px, considera che sta scrollando
+    if (diff > 10) {
+      isUserScrolling.current = true
+      setIsPaused(true)
+    }
+  }
+
+  const handleTouchEnd = () => {
+    // Riprendi lo scroll automatico dopo 2 secondi
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current)
+    }
+    pauseTimeoutRef.current = setTimeout(() => {
+      isUserScrolling.current = false
+      setIsPaused(false)
+    }, 2000)
+  }
 
   // Duplica le trasformazioni per l'effetto infinite loop
   const duplicatedTransformations = [...transformations, ...transformations, ...transformations]
@@ -137,8 +172,9 @@ export function Transformations() {
                 className="flex gap-4 md:gap-6 lg:gap-8 overflow-x-auto pb-8 px-4"
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
-                onTouchStart={() => setIsPaused(true)}
-                onTouchEnd={() => setIsPaused(false)}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
                 style={{
                   scrollbarWidth: 'thin',
                   scrollbarColor: '#6366f1 #1f2937'
