@@ -4,11 +4,20 @@ import { useLocation } from 'react-router-dom'
 /**
  * Component che forza lo scroll in cima alla pagina quando si cambia route
  * Importante per SPA che altrimenti mantengono la posizione di scroll
+ *
+ * Fix per mobile: disabilita temporaneamente scroll-behavior: smooth per scroll istantaneo
  */
 export function ScrollToTop() {
   const { pathname } = useLocation()
 
   useEffect(() => {
+    // Salva lo scroll behavior originale
+    const htmlElement = document.documentElement
+    const originalScrollBehavior = htmlElement.style.scrollBehavior
+
+    // Disabilita smooth scroll per uno scroll istantaneo
+    htmlElement.style.scrollBehavior = 'auto'
+
     // Forza scroll multipli per assicurarsi che funzioni sempre
     const scrollToTopImmediately = () => {
       window.scrollTo(0, 0)
@@ -24,10 +33,15 @@ export function ScrollToTop() {
       scrollToTopImmediately()
     })
 
-    // Scroll ritardato come fallback finale (alcuni componenti animati potrebbero ritardare)
+    // Scroll ritardato come fallback finale per mobile (alcuni componenti animati potrebbero ritardare)
     const timeoutId = setTimeout(() => {
       scrollToTopImmediately()
-    }, 10)
+
+      // Ripristina lo scroll behavior dopo 100ms
+      setTimeout(() => {
+        htmlElement.style.scrollBehavior = originalScrollBehavior
+      }, 100)
+    }, 50)
 
     return () => clearTimeout(timeoutId)
   }, [pathname])

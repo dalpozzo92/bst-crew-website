@@ -53,13 +53,20 @@ export function Header() {
     return location.pathname === href
   }
 
+  // Nascondi completamente l'header nella homepage quando non scrollato
+  const isHomePage = location.pathname === '/'
+  const shouldHideHeader = isHomePage && !isScrolled
+
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-40 transition-all duration-500',
         isScrolled
           ? 'bg-dark-900/90 backdrop-blur-xl border-b border-white/[0.08]'
-          : 'bg-dark-900/50 backdrop-blur-lg border-b border-white/[0.04]'
+          : 'bg-dark-900/50 backdrop-blur-lg border-b border-white/[0.04]',
+        shouldHideHeader
+          ? 'opacity-0 -translate-y-full pointer-events-none'
+          : 'opacity-100 translate-y-0 pointer-events-auto'
       )}
     >
       <nav className="container-custom">
@@ -67,7 +74,7 @@ export function Header() {
           {/* Logo - Nascosto nella homepage finché non si scrolla */}
           <Link to="/" className="flex items-center">
             <img
-              src={getAssetPath('/images/logo.png')}
+              src={getAssetPath('/images/logo.webp')}
               alt="BST Crew Logo"
               className={cn(
                 "h-9 w-auto object-contain transition-opacity duration-300",
@@ -141,7 +148,7 @@ export function Header() {
                   <div className="flex items-center justify-between p-6 border-b border-white/[0.08]">
                     <Link to="/" onClick={() => setMobileMenuOpen(false)}>
                       <img
-                        src={getAssetPath('/images/logo.png')}
+                        src={getAssetPath('/images/logo.webp')}
                         alt="BST Crew Logo"
                         className="h-8 w-auto object-contain"
                       />

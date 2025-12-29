@@ -19,7 +19,7 @@ export function BookSection() {
               <div className="relative">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                   <img
-                    src={getAssetPath('/images/libro.jpeg')}
+                    src={getAssetPath('/images/libro.webp')}
                     alt="Libro BST Crew incluso nel percorso"
                     className="w-full h-auto object-cover"
                   />

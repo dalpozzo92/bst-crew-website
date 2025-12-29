@@ -8,7 +8,7 @@ import { seoConfig } from '@/lib/seo-config'
 import { getPersonSchema, generateSchemaScript } from '@/lib/schema-org'
 import { getAssetPath } from '@/lib/assets'
 import { ScrollStackContainer } from '@/components/common/ScrollStack'
-
+import { ScrollFloat } from '@/components/common/ScrollFloat'
 /**
  * About Page (Chi Sono)
  *
@@ -62,7 +62,7 @@ export function About() {
             <AnimatedSection animation="fadeInLeft">
               <div className="relative w-full h-[600px] rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src={getAssetPath('/images/hero-profile.jpg')}
+                  src={getAssetPath('/images/hero-profile.webp')}
                   alt="Personal Trainer BST Crew"
                   className="w-full h-full object-cover"
                 />
@@ -72,7 +72,10 @@ export function About() {
             {/* Content */}
             <AnimatedSection animation="fadeInRight">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 tracking-tight">
+              <ScrollFloat containerClassName="mb-6">
+               
                 Chi Sono
+              </ScrollFloat>
               </h1>
               <div className="space-y-4 text-lg text-gray-300 leading-relaxed font-light">
                 <p>

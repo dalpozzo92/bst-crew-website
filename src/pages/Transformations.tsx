@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Target, TrendingUp, Award, CheckCircle2, ArrowRight } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Target, TrendingUp, Award, CheckCircle2, ArrowRight } from 'lucide-react'
 import { SEO } from '@/components/common/SEO'
 import { AnimatedSection } from '@/components/common/AnimatedSection'
+import { ScrollFloat } from '@/components/common/ScrollFloat'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getAssetPath } from '@/lib/assets'
 import { seoConfig } from '@/lib/seo-config'
 import { ScrollStackContainer } from '@/components/common/ScrollStack'
-
 /**
  * Transformations Page
  *
@@ -24,27 +25,27 @@ export function Transformations() {
   const transformations = [
     {
       id: 1,
-      image: getAssetPath('/images/transformation1.png'),
+      image: getAssetPath('/images/transformation1.webp'),
       alt: 'Trasformazione cliente BST Crew 1'
     },
     {
       id: 2,
-      image: getAssetPath('/images/transformation2.png'),
+      image: getAssetPath('/images/transformation2.webp'),
       alt: 'Trasformazione cliente BST Crew 2'
     },
     {
       id: 3,
-      image: getAssetPath('/images/transformation3.png'),
+      image: getAssetPath('/images/transformation3.webp'),
       alt: 'Trasformazione cliente BST Crew 3'
     },
     {
       id: 4,
-      image: getAssetPath('/images/transformation4.png'),
+      image: getAssetPath('/images/transformation4.webp'),
       alt: 'Trasformazione cliente BST Crew 4'
     },
     {
       id: 5,
-      image: getAssetPath('/images/transformation5.png'),
+      image: getAssetPath('/images/transformation5.webp'),
       alt: 'Trasformazione cliente BST Crew 5'
     }
   ]
@@ -67,6 +68,38 @@ export function Transformations() {
     }
   ]
 
+  // Auto-scroll infinito per la galleria
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [isPaused, setIsPaused] = useState(false)
+
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const scrollSpeed = 0.5 // pixel per frame
+    let animationFrameId: number
+
+    const scroll = () => {
+      if (!isPaused && container) {
+        container.scrollLeft += scrollSpeed
+
+        // Reset allo scroll quando arriva alla metà (dove finiscono le immagini originali)
+        const maxScroll = container.scrollWidth / 2
+        if (container.scrollLeft >= maxScroll) {
+          container.scrollLeft = 0
+        }
+      }
+      animationFrameId = requestAnimationFrame(scroll)
+    }
+
+    animationFrameId = requestAnimationFrame(scroll)
+
+    return () => cancelAnimationFrame(animationFrameId)
+  }, [isPaused])
+
+  // Duplica le trasformazioni per l'effetto infinite loop
+  const duplicatedTransformations = [...transformations, ...transformations, ...transformations]
+
   return (
     <>
       <SEO config={seoConfig.transformations} />
@@ -78,9 +111,9 @@ export function Transformations() {
             <Badge className="mb-6 bg-primary-500/10 text-primary-500 hover:bg-primary-500/20 border-primary-500/20">
               Risultati Reali
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6 tracking-tight">
+            <ScrollFloat containerClassName="mb-6">
               Trasformazioni Prima e Dopo
-            </h1>
+            </ScrollFloat>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
               Questi non sono sogni, sono risultati concreti ottenuti dai miei clienti
               con <span className="text-white font-normal">metodo scientifico</span>,{' '}
@@ -91,41 +124,34 @@ export function Transformations() {
         </div>
       </section>
 
-      {/* Horizontal Scroll Gallery */}
+      {/* Horizontal Scroll Gallery - Auto-scroll Infinito */}
       <section className="section-padding overflow-hidden">
         <div className="container-custom">
           <AnimatedSection>
             {/* Scroll Hint */}
-            <div className="text-center mb-8">
-              <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
-                <ChevronLeft className="w-4 h-4" />
-                Scorri orizzontalmente per vedere tutte le trasformazioni
-                <ChevronRight className="w-4 h-4" />
-              </p>
-            </div>
 
-            {/* Horizontal Scroll Container */}
+            {/* Horizontal Scroll Container con Auto-scroll */}
             <div className="relative">
               <div
-                className="flex gap-4 md:gap-6 lg:gap-8 overflow-x-auto pb-8 px-4 snap-x snap-mandatory scroll-smooth"
+                ref={scrollContainerRef}
+                className="flex gap-4 md:gap-6 lg:gap-8 overflow-x-auto pb-8 px-4"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                onTouchStart={() => setIsPaused(true)}
+                onTouchEnd={() => setIsPaused(false)}
                 style={{
                   scrollbarWidth: 'thin',
-                  scrollbarColor: '#6366f1 #1f2937',
-                  scrollPaddingLeft: '50%',
-                  scrollPaddingRight: '50%'
+                  scrollbarColor: '#6366f1 #1f2937'
                 }}
               >
-                {/* Spacer per centrare la prima card */}
-                <div className="flex-shrink-0 w-[calc(50vw-140px)] sm:w-[calc(50vw-180px)] md:w-[calc(50vw-260px)] lg:w-[calc(50vw-340px)] xl:w-[calc(50vw-400px)]" />
-
-                {transformations.map((transformation, index) => (
+                {duplicatedTransformations.map((transformation, index) => (
                   <motion.div
-                    key={transformation.id}
+                    key={`${transformation.id}-${index}`}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex-shrink-0 snap-center"
+                    transition={{ delay: (index % transformations.length) * 0.05 }}
+                    className="flex-shrink-0"
                   >
                     <Card className="bg-dark-900 border-white/[0.08] overflow-hidden group hover:border-primary-500/30 hover:scale-105 transition-all duration-300 w-[280px] sm:w-[360px] md:w-[520px] lg:w-[680px] xl:w-[800px] shadow-2xl hover:shadow-primary-500/20">
                       <CardContent className="p-0">
@@ -143,9 +169,6 @@ export function Transformations() {
                     </Card>
                   </motion.div>
                 ))}
-
-                {/* Spacer per centrare l'ultima card */}
-                <div className="flex-shrink-0 w-[calc(50vw-140px)] sm:w-[calc(50vw-180px)] md:w-[calc(50vw-260px)] lg:w-[calc(50vw-340px)] xl:w-[calc(50vw-400px)]" />
               </div>
             </div>
 
@@ -176,7 +199,10 @@ export function Transformations() {
           <AnimatedSection className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
-                Come Ottenere Risultati Come Questi
+                <ScrollFloat containerClassName="mb-6">
+
+                  Come Ottenere Risultati Come Questi
+                </ScrollFloat>
               </h2>
               <p className="text-lg text-gray-400 max-w-3xl mx-auto">
                 Le trasformazioni che vedi non sono frutto della fortuna. Sono il risultato

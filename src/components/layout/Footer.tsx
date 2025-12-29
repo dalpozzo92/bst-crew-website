@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Mail } from 'lucide-react'
 import { InstagramIcon } from '@/components/common/InstagramIcon'
 import { Separator } from '@/components/ui/separator'
+import { ScrollVelocity } from '@/components/common/ScrollVelocity'
 import { getAssetPath } from '@/lib/assets'
 
 /**
@@ -27,7 +28,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <img
-                src={getAssetPath('/images/logo.png')}
+                src={getAssetPath('/images/logo.webp')}
                 alt="BST Crew Logo"
                 className="h-12 w-auto"
               />
@@ -147,13 +148,15 @@ export function Footer() {
             Personal Trainer a Pergine Valsugana e Trento
           </p>
         </div>
-                <Separator className="my-8 bg-gray-800" />
+        <Separator className="my-8 bg-gray-800" />
 
-        <div className="justify-between items-center space-y-4 sm:space-y-0">
-          <p className="text-xs text-gray-400">
-            Creato con ❤️ da Nicola Dal Pozzo - N LAB.
-          </p>
-         
+        {/* Animated Footer Text */}
+        <div className="py-4">
+          <ScrollVelocity
+            texts={['Creato con ❤️ da Nicola Dal Pozzo - N LAB']}
+            velocity={-15}
+            className="text-xs text-gray-500 font-light"
+          />
         </div>
       </div>
     </footer>

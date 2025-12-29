@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Dumbbell } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -14,17 +15,24 @@ import { StatCounter } from '@/components/common/StatCounter'
  * - CTA primaria verso contatti
  * - Animazione entrance con Framer Motion
  * - Background gradient moderno
+ * - Fade-in animato per l'immagine di sfondo
  * - Responsive design
  */
 export function Hero() {
+  const [imageLoaded, setImageLoaded] = useState(false)
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image con Fade-in */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={getAssetPath('/images/home-profile.png')}
+        <motion.img
+          src={getAssetPath('/images/home-profile.webp')}
           alt="BST Crew Personal Trainer"
           className="w-full h-full object-cover"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: imageLoaded ? 1 : 0 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          onLoad={() => setImageLoaded(true)}
         />
         {/* Dark overlay per leggibilità testo */}
         <div className="absolute inset-0 bg-gradient-to-b from-dark-800/60 via-dark-900/60 to-dark-800"></div>
@@ -46,7 +54,7 @@ export function Hero() {
               className="mb-12"
             >
               <img
-                src={getAssetPath('/images/logo.png')}
+                src={getAssetPath('/images/logo.webp')}
                 alt="BST Crew Logo"
                 className="h-20 md:h-24 lg:h-28 w-auto mx-auto object-contain"
               />
@@ -54,7 +62,7 @@ export function Hero() {
 
             {/* Nome */}
             <div className="mb-4">
-              <p className="text-sm md:text-base font-light tracking-[0.2em] uppercase text-gray-400">
+              <p className="text-sm md:text-base font-light tracking-[0.5em] uppercase text-gray-300">
                 Nicola Dal Pozzo
               </p>
             </div>
@@ -77,7 +85,7 @@ export function Hero() {
 
             {/* Subtitle - Value Proposition */}
             <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-10 max-w-2xl mx-auto font-light">
-              Coaching personalizzato per{' '}
+              Personal trainer e Coaching online per{' '}
               <span className="text-gray-200 font-normal">massa muscolare</span>,{' '}
               <span className="text-gray-200 font-normal">dimagrimento</span> e{' '}
               <span className="text-gray-200 font-normal">ricomposizione corporea</span>

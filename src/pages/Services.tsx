@@ -30,7 +30,7 @@ export function Services() {
       subtitle: 'Trasformazione a 360° - In Presenza a Pergine o Online',
       description: 'Un percorso completo su misura per il tuo corpo, i tuoi obiettivi e il tuo stile di vita. Disponibile sia in presenza a Pergine Valsugana che online ovunque tu sia. Include allenamento personalizzato, linee guida nutrizionali dal mio libro e accesso all\'app predittiva per monitorare i tuoi progressi in tempo reale.',
       icon: Target,
-      image: getAssetPath('/images/coaching.png'),
+      image: getAssetPath('/images/coaching.webp'),
       features: [
         'Modalità in presenza (Pergine Valsugana) o online - tu scegli',
         'Analisi completa della composizione corporea',
@@ -40,12 +40,14 @@ export function Services() {
         'Revisioni programma ogni 4 settimane',
         'Supporto chat integrato Lun-Sab',
         'Video tutorial e guida tecnica completa',
-        'Check-in settimanali e feedback personalizzato',
+        'Check-in mensili e feedback personalizzato',
+        'Call o incontro al cambio programma per valutare insieme i progressi',
         'Strategie per mantenere i risultati nel tempo',
         'Accesso a materiale formativo esclusivo',
-        'Durata: 12-24 settimane con obiettivi chiari'
+        'Durata: a partire da 6 mesi con obiettivi chiari'
       ],
       idealFor: [
+        'Chi vuole affidarsi ad un professionista e non al solito istruttore senza specializzazioni',
         'Chi vuole una trasformazione fisica completa e duratura',
         'Chi cerca risultati concreti con un metodo scientifico',
         'Chi desidera massima flessibilità (presenza o online)',
@@ -61,21 +63,20 @@ export function Services() {
       subtitle: 'Allenamenti Individuali a Pergine Valsugana e Trento',
       description: 'Sessioni di allenamento individuali presso le palestre partner a Pergine Valsugana e Trento. Massima attenzione, correzione tecnica costante e programmazione personalizzata per ogni sessione. Ideale per chi vuole un supporto diretto e risultati rapidi.',
       icon: Dumbbell,
-      image: getAssetPath('/images/coaching1-1.png'),
+      image: getAssetPath('/images/coaching1-1.webp'),
       features: [
-        'Allenamenti one-to-one in palestre attrezzate',
-        'Disponibile a Pergine Valsugana e Trento',
-        'Programmi personalizzati sessione per sessione',
-        'Correzione tecnica in tempo reale',
-        'Monitoraggio dei progressi settimanali',
+        'Allenamenti one-to-one in palestra attrezzata',
+        'Perfetti per imparare insieme il programma personalizzato',
+        'Disponibile a Pergine Valsugana, Trento e zone limitrofe',
+        'Correzione tecnica approfondita in tempo reale',
+        'Monitoraggio dei progressi',
         'Focus su ipertrofia e risultati estetici',
         'Massima motivazione e supporto dedicato',
-        'Flessibilità di orari e location (Pergine o Trento)'
       ],
       idealFor: [
         'Chi vuole massimizzare i risultati con supporto diretto',
         'Principianti che vogliono imparare la tecnica corretta fin da subito',
-        'Chi preferisce allenarsi con un coach sempre al fianco',
+        'Chi preferisce allenarsi con un coach sempre al suo fianco',
         'Chi cerca motivazione extra e accountability costante',
         'Chi abita a Pergine Valsugana, Trento o zone limitrofe'
       ],
@@ -92,7 +93,7 @@ export function Services() {
         <div className="container-custom">
           <AnimatedSection className="max-w-4xl mx-auto text-center">
             <Badge className="mb-6 bg-primary-500/10 text-primary-500 hover:bg-primary-500/20 border-primary-500/20">
-              Servizi Professionali
+              Percorsi Professionali
             </Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6 tracking-tight">
               Servizi Personal Training

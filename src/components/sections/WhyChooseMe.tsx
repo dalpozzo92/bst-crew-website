@@ -1,5 +1,6 @@
 import { Brain, LineChart, Sparkles, Trophy } from 'lucide-react'
 import { AnimatedSection } from '@/components/common/AnimatedSection'
+import { ScrollFloat } from '@/components/common/ScrollFloat'
 
 const benefits = [
   {
@@ -41,9 +42,9 @@ export function WhyChooseMe() {
       <div className="container-custom">
         {/* Section Header */}
         <AnimatedSection className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
+          <ScrollFloat containerClassName="mb-4">
             Perché Scegliere Me
-          </h2>
+          </ScrollFloat>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Un metodo di lavoro professionale, basato su scienza e personalizzazione,
             per portarti ai risultati che desideri.

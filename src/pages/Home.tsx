@@ -3,6 +3,8 @@ import { ArrowRight, Laptop, TrendingUp, MessageCircle, Bell, BarChart3, Activit
 import { SEO } from '@/components/common/SEO'
 import { Hero } from '@/components/sections/Hero'
 import { WhyChooseMe } from '@/components/sections/WhyChooseMe'
+import { BiomechanicsSection } from '@/components/sections/BiomechanicsSection'
+import { ComparisonSection } from '@/components/sections/ComparisonSection'
 import { BookSection } from '@/components/sections/BookSection'
 import { InstagramSection } from '@/components/sections/InstagramSection'
 import { AnimatedSection } from '@/components/common/AnimatedSection'
@@ -41,6 +43,12 @@ export function Home() {
 
       {/* Why Choose Me */}
       <WhyChooseMe />
+
+      {/* Biomechanics Specialization */}
+      <BiomechanicsSection />
+
+      {/* Comparison Section - My Path vs Others */}
+      <ComparisonSection />
 
        {/* Software Predittivo Section */}
       <section className="section-padding bg-gradient-to-b from-primary-500/5 to-transparent">

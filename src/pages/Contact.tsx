@@ -132,11 +132,10 @@ export function Contact() {
                     📍 Dove Opero
                   </h3>
                   <p className="text-sm text-gray-300 leading-relaxed">
-                    Collaboro con palestre attrezzate a{' '}
-                    <strong className="text-white">Pergine Valsugana</strong> e{' '}
-                    <strong className="text-white">Trento</strong>. Per chi preferisce allenarsi
+                    Collaboro con una palestra attrezzata a{' '}
+                    <strong className="text-white">Pergine Valsugana</strong>. Per chi preferisce allenarsi
                     in autonomia o non può raggiungere la palestra, offro servizi di{' '}
-                    <strong className="text-white">coaching online</strong> in tutta Italia.
+                    <strong className="text-white">coaching online</strong> a Trento, zone limitrofe e in tutta Italia.
                   </p>
                 </div>
 
