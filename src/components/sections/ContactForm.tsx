@@ -1,107 +1,39 @@
-import { useState, useRef } from 'react'
-import { useForm } from 'react-hook-form'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
-import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { useRef, useState } from 'react'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ContactFormData, FormState } from '@/types'
+import { Button } from '@/components/ui/button'
+import { CheckCircle2, AlertCircle, Send } from 'lucide-react'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 
-/**
- * Contact Form Component con hCaptcha
- *
- * Features:
- * - Validazione client-side con react-hook-form
- * - hCaptcha per protezione anti-bot (GDPR-friendly)
- * - Invio a servizio esterno (FormSubmit.co)
- * - Stati: loading, success, error
- * - Accessibilità WCAG 2.1 AA
- *
- * SETUP:
- * 1. Configurare VITE_HCAPTCHA_SITE_KEY in .env
- * 2. Configurare VITE_FORM_ENDPOINT in .env (FormSubmit.co URL)
- */
 export function ContactForm() {
-  const [formState, setFormState] = useState<FormState>({
-    isSubmitting: false,
+  const [formState, setFormState] = useState({
     isSuccess: false,
-    isError: false
+    isError: false,
+    message: ''
   })
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
-  const captchaRef = useRef<HCaptcha>(null)
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors }
-  } = useForm<ContactFormData>()
+  const captchaRef = useRef<HCaptcha>(null)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   const HCAPTCHA_SITE_KEY = import.meta.env.VITE_HCAPTCHA_SITE_KEY
-  const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT
 
   const onCaptchaChange = (token: string) => {
     setCaptchaToken(token)
   }
 
- const onSubmit = async (data: ContactFormData) => {
-  if (!captchaToken) {
-    setFormState({
-      isSubmitting: false,
-      isSuccess: false,
-      isError: true,
-      message: 'Completa la verifica anti-bot.'
-    })
-    return
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (!captchaToken) {
+      e.preventDefault()
+      setFormState({
+        isSuccess: false,
+        isError: true,
+        message: 'Completa la verifica anti-bot.'
+      })
+      return
+    }
+    // Dopo submit, FormSubmit gestisce tutto. Puoi aggiungere _next per redirect se vuoi.
   }
-
-  setFormState({ isSubmitting: true, isSuccess: false, isError: false })
-
-  try {
-    const formData = new FormData()
-
-    // campi del form
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value as string)
-    })
-
-    // campi FormSubmit
-    formData.append('_subject', 'Nuovo contatto dal sito BST Crew')
-    formData.append('_template', 'table')
-
-    // hCaptcha (FormSubmit lo legge)
-    formData.append('h-captcha-response', captchaToken)
-
-    const response = await fetch(FORM_ENDPOINT, {
-      method: 'POST',
-      body: formData
-    })
-
-    if (!response.ok) throw new Error('Errore invio')
-
-    setFormState({
-      isSubmitting: false,
-      isSuccess: true,
-      isError: false,
-      message: 'Messaggio inviato con successo! Ti risponderò al più presto.'
-    })
-
-    reset()
-    captchaRef.current?.resetCaptcha()
-    setCaptchaToken(null)
-  } catch (err) {
-    console.error(err)
-    setFormState({
-      isSubmitting: false,
-      isSuccess: false,
-      isError: true,
-      message: 'Errore durante l’invio. Riprova.'
-    })
-  }
-}
-
 
   return (
     <Card className="max-w-2xl mx-auto bg-dark-900 border-white/[0.08]">
@@ -115,97 +47,52 @@ export function ContactForm() {
       </CardHeader>
 
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form
+          action="https://formsubmit.co/17d1662df807001db96cb24a3b05473f"
+          method="POST"
+          onSubmit={onSubmit}
+          className="space-y-6"
+        >
           {/* Nome */}
           <div className="space-y-2">
-            <Label htmlFor="name">Nome e Cognome *</Label>
-            <Input
-              id="name"
-              type="text"
-              placeholder="Mario Rossi"
-              {...register('name', {
-                required: 'Il nome è obbligatorio',
-                minLength: {
-                  value: 2,
-                  message: 'Il nome deve contenere almeno 2 caratteri'
-                }
-              })}
-              className={errors.name ? 'border-red-500' : ''}
-            />
-            {errors.name && (
-              <p className="text-sm text-red-600" role="alert">
-                {errors.name.message}
-              </p>
-            )}
+            <label htmlFor="name">Nome e Cognome *</label>
+            <Input id="name" type="text" name="name" placeholder="Mario Rossi" required />
           </div>
 
           {/* Email */}
           <div className="space-y-2">
-            <Label htmlFor="email">Email *</Label>
+            <label htmlFor="email">Email *</label>
             <Input
               id="email"
               type="email"
+              name="email"
               placeholder="mario.rossi@example.com"
-              {...register('email', {
-                required: 'L\'email è obbligatoria',
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: 'Inserisci un\'email valida'
-                }
-              })}
-              className={errors.email ? 'border-red-500' : ''}
+              required
             />
-            {errors.email && (
-              <p className="text-sm text-red-600" role="alert">
-                {errors.email.message}
-              </p>
-            )}
           </div>
 
           {/* Telefono */}
           <div className="space-y-2">
-            <Label htmlFor="phone">Telefono *</Label>
+            <label htmlFor="phone">Telefono *</label>
             <Input
               id="phone"
               type="tel"
+              name="phone"
               placeholder="+39 xxx xxxxxxx"
-              {...register('phone', {
-                required: 'Il telefono è obbligatorio',
-                pattern: {
-                  value: /^\+?([0-9]{2,3})\s?([0-9]{3,4})\s?([0-9]{3,4})$/,
-                  message: 'Inserisci un numero di telefono valido'
-                }
-              })}
-             className={errors.email ? 'border-red-500' : ''}
+              required
             />
-            {errors.email && (
-              <p className="text-sm text-red-600" role="alert">
-                {errors.email.message}
-              </p>
-            )}
           </div>
 
           {/* Messaggio */}
           <div className="space-y-2">
-            <Label htmlFor="message">Messaggio *</Label>
+            <label htmlFor="message">Messaggio *</label>
             <Textarea
               id="message"
+              name="message"
               placeholder="Raccontami i tuoi obiettivi e come posso aiutarti..."
               rows={5}
-              {...register('message', {
-                required: 'Il messaggio è obbligatorio',
-                minLength: {
-                  value: 10,
-                  message: 'Il messaggio deve contenere almeno 10 caratteri'
-                }
-              })}
-              className={errors.message ? 'border-red-500' : ''}
+              required
             />
-            {errors.message && (
-              <p className="text-sm text-red-600" role="alert">
-                {errors.message.message}
-              </p>
-            )}
           </div>
 
           {/* hCaptcha */}
@@ -220,15 +107,13 @@ export function ContactForm() {
             </div>
           )}
 
-          {/* Success Message */}
+          {/* Messaggi di stato */}
           {formState.isSuccess && (
             <div className="flex items-start space-x-3 p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
               <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
               <p className="text-sm text-green-300">{formState.message}</p>
             </div>
           )}
-
-          {/* Error Message */}
           {formState.isError && (
             <div className="flex items-start space-x-3 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
               <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
@@ -241,19 +126,10 @@ export function ContactForm() {
             type="submit"
             size="lg"
             className="w-full bg-primary-500 hover:bg-primary-600"
-            disabled={formState.isSubmitting || !HCAPTCHA_SITE_KEY}
+            disabled={!HCAPTCHA_SITE_KEY}
           >
-            {formState.isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 w-5 h-5 animate-spin" />
-                Invio in corso...
-              </>
-            ) : (
-              <>
-                <Send className="mr-2 w-5 h-5" />
-                Invia Messaggio
-              </>
-            )}
+            <Send className="mr-2 w-5 h-5" />
+            Invia Messaggio
           </Button>
 
           {!HCAPTCHA_SITE_KEY && (
@@ -261,6 +137,11 @@ export function ContactForm() {
               ⚠️ Configurare VITE_HCAPTCHA_SITE_KEY in .env per abilitare il form
             </p>
           )}
+
+          {/* Hidden FormSubmit fields */}
+          <input type="hidden" name="_subject" value="Nuovo contatto dal sito BST Crew" />
+          <input type="hidden" name="_template" value="table" />
+          {/* puoi aggiungere _next se vuoi redirect */}
         </form>
       </CardContent>
     </Card>
