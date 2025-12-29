@@ -17,45 +17,52 @@ export function ContactForm() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   const HCAPTCHA_SITE_KEY = import.meta.env.VITE_HCAPTCHA_SITE_KEY
-const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT || 'https://formsubmit.co/17d1662df807001db96cb24a3b05473f'
+  const FORM_ENDPOINT =
+    import.meta.env.VITE_FORM_ENDPOINT ||
+    'https://formsubmit.co/17d1662df807001db96cb24a3b05473f'
+
   const onCaptchaChange = (token: string) => {
     setCaptchaToken(token)
   }
 
-const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  if (!captchaToken) {
-    e.preventDefault()
-    setFormState({
-      isSuccess: false,
-      isError: true,
-      message: 'Completa la verifica anti-bot.'
-    })
-    return
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault() // blocca subito il comportamento nativo
+    if (!captchaToken) {
+      setFormState({
+        isSuccess: false,
+        isError: true,
+        message: 'Completa la verifica anti-bot.'
+      })
+      return
+    }
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    try {
+      await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        body: formData
+      })
+
+      setFormState({
+        isSuccess: true,
+        isError: false,
+        message: 'Messaggio inviato con successo! Ti risponderò al più presto.'
+      })
+
+      form.reset()
+      captchaRef.current?.resetCaptcha()
+      setCaptchaToken(null)
+    } catch (err) {
+      console.error('Errore invio form:', err)
+      setFormState({
+        isSuccess: false,
+        isError: true,
+        message: 'Si è verificato un errore. Riprova più tardi.'
+      })
+    }
   }
-
-  // Mostra subito messaggio di successo
-  e.preventDefault() // blocca il redirect
-  setFormState({
-    isSuccess: true,
-    isError: false,
-    message: 'Messaggio inviato con successo! Ti risponderò al più presto.'
-  })
-
-  // Invia form a FormSubmit tramite FormData in background
-  const form = e.currentTarget
-  const formData = new FormData(form)
-  fetch(form.action, { method: 'POST', body: formData })
-    .then(() => console.log('Email inviata'))
-    .catch(() => console.log('Errore invio'))
-
-  // Resetta hCaptcha
-  captchaRef.current?.resetCaptcha()
-  setCaptchaToken(null)
-
-  // Resetta campi se vuoi
-  form.reset()
-}
-
 
   return (
     <Card className="max-w-2xl mx-auto bg-dark-900 border-white/[0.08]">
@@ -69,12 +76,7 @@ const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       </CardHeader>
 
       <CardContent>
-        <form
-          action={FORM_ENDPOINT}
-          method="POST"
-          onSubmit={onSubmit}
-          className="space-y-6"
-        >
+        <form onSubmit={onSubmit} className="space-y-6">
           {/* Nome */}
           <div className="space-y-2">
             <label htmlFor="name">Nome e Cognome *</label>
@@ -164,7 +166,6 @@ const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
           <input type="hidden" name="_subject" value="Nuovo contatto dal sito BST Crew" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
-          {/* puoi aggiungere _next se vuoi redirect */}
         </form>
       </CardContent>
     </Card>
