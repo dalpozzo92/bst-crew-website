@@ -46,59 +46,62 @@ export function ContactForm() {
     setCaptchaToken(token)
   }
 
-  const onSubmit = async (data: ContactFormData) => {
-    // Verifica hCaptcha
-    if (!captchaToken) {
-      setFormState({
-        isSubmitting: false,
-        isSuccess: false,
-        isError: true,
-        message: 'Completa la verifica anti-bot.'
-      })
-      return
-    }
-
-    setFormState({ isSubmitting: true, isSuccess: false, isError: false })
-
-    try {
-      // Invia a FormSubmit.co (o altro servizio)
-      const response = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          ...data,
-          'h-captcha-response': captchaToken,
-          _subject: 'Nuovo contatto dal sito BST Crew',
-          _template: 'table' // FormSubmit.co template
-        })
-      })
-
-      if (response.ok) {
-        setFormState({
-          isSubmitting: false,
-          isSuccess: true,
-          isError: false,
-          message: 'Messaggio inviato con successo! Ti risponderò al più presto.'
-        })
-        reset()
-        captchaRef.current?.resetCaptcha()
-        setCaptchaToken(null)
-      } else {
-        throw new Error('Errore durante l\'invio')
-      }
-    } catch (error) {
-      console.error('Form submission error:', error)
-      setFormState({
-        isSubmitting: false,
-        isSuccess: false,
-        isError: true,
-        message: 'Si è verificato un errore. Riprova o contattami direttamente via email.'
-      })
-    }
+ const onSubmit = async (data: ContactFormData) => {
+  if (!captchaToken) {
+    setFormState({
+      isSubmitting: false,
+      isSuccess: false,
+      isError: true,
+      message: 'Completa la verifica anti-bot.'
+    })
+    return
   }
+
+  setFormState({ isSubmitting: true, isSuccess: false, isError: false })
+
+  try {
+    const formData = new FormData()
+
+    // campi del form
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value as string)
+    })
+
+    // campi FormSubmit
+    formData.append('_subject', 'Nuovo contatto dal sito BST Crew')
+    formData.append('_template', 'table')
+
+    // hCaptcha (FormSubmit lo legge)
+    formData.append('h-captcha-response', captchaToken)
+
+    const response = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      body: formData
+    })
+
+    if (!response.ok) throw new Error('Errore invio')
+
+    setFormState({
+      isSubmitting: false,
+      isSuccess: true,
+      isError: false,
+      message: 'Messaggio inviato con successo! Ti risponderò al più presto.'
+    })
+
+    reset()
+    captchaRef.current?.resetCaptcha()
+    setCaptchaToken(null)
+  } catch (err) {
+    console.error(err)
+    setFormState({
+      isSubmitting: false,
+      isSuccess: false,
+      isError: true,
+      message: 'Errore durante l’invio. Riprova.'
+    })
+  }
+}
+
 
   return (
     <Card className="max-w-2xl mx-auto bg-dark-900 border-white/[0.08]">
