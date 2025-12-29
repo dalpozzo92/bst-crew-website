@@ -22,18 +22,40 @@ const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT || 'https://formsubmit.
     setCaptchaToken(token)
   }
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    if (!captchaToken) {
-      e.preventDefault()
-      setFormState({
-        isSuccess: false,
-        isError: true,
-        message: 'Completa la verifica anti-bot.'
-      })
-      return
-    }
-    // Dopo submit, FormSubmit gestisce tutto. Puoi aggiungere _next per redirect se vuoi.
+const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  if (!captchaToken) {
+    e.preventDefault()
+    setFormState({
+      isSuccess: false,
+      isError: true,
+      message: 'Completa la verifica anti-bot.'
+    })
+    return
   }
+
+  // Mostra subito messaggio di successo
+  e.preventDefault() // blocca il redirect
+  setFormState({
+    isSuccess: true,
+    isError: false,
+    message: 'Messaggio inviato con successo! Ti risponderò al più presto.'
+  })
+
+  // Invia form a FormSubmit tramite FormData in background
+  const form = e.currentTarget
+  const formData = new FormData(form)
+  fetch(form.action, { method: 'POST', body: formData })
+    .then(() => console.log('Email inviata'))
+    .catch(() => console.log('Errore invio'))
+
+  // Resetta hCaptcha
+  captchaRef.current?.resetCaptcha()
+  setCaptchaToken(null)
+
+  // Resetta campi se vuoi
+  form.reset()
+}
+
 
   return (
     <Card className="max-w-2xl mx-auto bg-dark-900 border-white/[0.08]">
