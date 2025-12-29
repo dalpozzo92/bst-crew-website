@@ -17,7 +17,7 @@ export function ContactForm() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   const HCAPTCHA_SITE_KEY = import.meta.env.VITE_HCAPTCHA_SITE_KEY
-
+const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT || 'https://formsubmit.co/17d1662df807001db96cb24a3b05473f'
   const onCaptchaChange = (token: string) => {
     setCaptchaToken(token)
   }
@@ -48,7 +48,7 @@ export function ContactForm() {
 
       <CardContent>
         <form
-          action="https://formsubmit.co/17d1662df807001db96cb24a3b05473f"
+          action={FORM_ENDPOINT}
           method="POST"
           onSubmit={onSubmit}
           className="space-y-6"
@@ -141,6 +141,7 @@ export function ContactForm() {
           {/* Hidden FormSubmit fields */}
           <input type="hidden" name="_subject" value="Nuovo contatto dal sito BST Crew" />
           <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
           {/* puoi aggiungere _next se vuoi redirect */}
         </form>
       </CardContent>
