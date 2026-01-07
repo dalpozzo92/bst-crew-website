@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { Layout } from '@/components/layout/Layout'
+import { ScrollToTop } from '@/components/common/ScrollToTop'
 
 // Pages
 import { Home } from '@/pages/Home'
@@ -41,6 +42,7 @@ function App() {
           v7_relativeSplatPath: true,
         }}
       >
+        <ScrollToTop />
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
