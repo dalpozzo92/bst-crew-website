@@ -24,6 +24,25 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!--
+      GitHub Pages SPA Redirect Script - Parte 2
+
+      Quando 404.html redirige qui, questo script ripristina l'URL originale
+      usando history.replaceState. Questo è trasparente per i crawler e mantiene
+      gli URL puliti per SEO.
+    -->
+    <script>
+      (function() {
+        var redirectPath = sessionStorage.getItem('redirectPath');
+        if (redirectPath) {
+          sessionStorage.removeItem('redirectPath');
+          // Ripristina l'URL originale senza ricaricare la pagina
+          history.replaceState(null, '', redirectPath);
+        }
+      })();
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

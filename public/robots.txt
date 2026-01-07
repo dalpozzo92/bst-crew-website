@@ -1,22 +1,18 @@
 # robots.txt per bstcrew.it
+# Consente a tutti i crawler di indicizzare il sito
+
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemap (IMPORTANTE: deve essere accessibile!)
 Sitemap: https://bstcrew.it/sitemap.xml
 
-# Blocca file di sistema
-Disallow: /api/
-Disallow: /*.json$
-Disallow: /*.xml$
-Disallow: /sitemap.xml
+# Blocca crawler indesiderati (risparmia banda)
+User-agent: AhrefsBot
+Disallow: /
 
-# Consenti bot di ricerca principali
-User-agent: Googlebot
-Allow: /
+User-agent: SemrushBot
+Disallow: /
 
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
+User-agent: DotBot
+Disallow: /

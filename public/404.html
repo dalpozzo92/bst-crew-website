@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <title>BST Crew - Personal Trainer Pergine Valsugana</title>
+
+    <!--
+      GitHub Pages SPA Redirect Script
+
+      Quando GitHub Pages trova una route che non esiste (es: /chi-sono),
+      serve questo 404.html. Lo script salva il path nella sessionStorage
+      e redirige alla home (/), dove index.html ripristinerà l'URL corretto.
+
+      Questo permette di mantenere URL puliti (/chi-sono) invece di hash (/#/chi-sono)
+      ed è completamente trasparente per i crawler come Googlebot.
+    -->
+    <script>
+      // Salva il path richiesto nella sessionStorage
+      sessionStorage.setItem(
+        'redirectPath',
+        window.location.pathname + window.location.search + window.location.hash
+      );
+
+      // Redirige alla home (/)
+      // GitHub Pages gestirà correttamente questo redirect
+      window.location.replace('/');
+    </script>
+  </head>
+  <body>
+    <!-- Questo contenuto non verrà mai mostrato grazie al redirect immediato -->
+  </body>
+</html>

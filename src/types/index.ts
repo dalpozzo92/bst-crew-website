@@ -85,12 +85,20 @@ export interface PersonSchema {
   name: string
   jobTitle: string
   description: string
+  image?: string
   url: string
   sameAs: string[]
   worksFor?: {
     '@type': string
     name: string
   }
+  address?: {
+    '@type': string
+    addressLocality: string
+    addressRegion: string
+    addressCountry: string
+  }
+  telephone?: string
 }
 
 // FAQ Schema

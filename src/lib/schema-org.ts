@@ -13,7 +13,7 @@ export const getLocalBusinessSchema = (): LocalBusinessSchema => ({
   '@type': 'LocalBusiness',
   '@id': `${SITE_URL}/#business`,
   name: 'BST Crew - Personal Trainer',
-  image: `${SITE_URL}/logo.png`, // TODO: Aggiornare con URL logo effettivo
+  image: `${SITE_URL}/images/logo.webp`,
   description: 'Personal Trainer specializzato in ipertrofia muscolare, dimagrimento e ricomposizione corporea. Servizi di coaching in palestra a Pergine Valsugana e online in tutto il Trentino.',
   address: {
     '@type': 'PostalAddress',
@@ -55,15 +55,23 @@ export const getLocalBusinessSchema = (): LocalBusinessSchema => ({
 export const getPersonSchema = (): PersonSchema => ({
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Personal Trainer BST Crew', // TODO: Aggiornare con nome reale
+  name: 'Nicola Dal Pozzo',
   jobTitle: 'Personal Trainer & Coach',
   description: 'Personal Trainer certificato specializzato in allenamenti personalizzati per ipertrofia muscolare, dimagrimento e ricomposizione corporea.',
+  image: `${SITE_URL}/images/hero-profile.webp`,
   url: SITE_URL,
   sameAs: [INSTAGRAM_URL],
   worksFor: {
     '@type': 'LocalBusiness',
     name: 'BST Crew'
-  }
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Pergine Valsugana',
+    addressRegion: 'TN',
+    addressCountry: 'IT'
+  },
+  telephone: PHONE
 })
 
 /**
