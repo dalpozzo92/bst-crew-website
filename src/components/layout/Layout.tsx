@@ -29,14 +29,17 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col relative bg-dark-900">
       {/* Animated lines background - optimized performance */}
-      <AnimatedBackground
-        variant="linee-move"
+      {/* Non mostrare sfondo animato nella pagina servizi */}
+      {location.pathname !== '/servizi' && (
+        <AnimatedBackground
+          variant="linee-move"
           intensity="light"
           height="100%"
           position="fixed"
           speed={3}
           fadeInDuration={2000}
-      />
+        />
+      )}
 
       {/* Content layer */}
       <div className="relative z-10 flex flex-col min-h-screen">

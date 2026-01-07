@@ -148,32 +148,29 @@ export function Services() {
     gsap.set(endMarker, { opacity: 0, scale: 0 })
 
     // Animazione con ScrollTrigger - inizia quando la linea è al centro dello schermo
-    const scrollTrigger = {
-      trigger: containerRef.current,
-      start: 'top center', // Inizia quando il punto di partenza è a metà schermo
-      end: 'bottom bottom', // Continua fino a quando la sezione esce completamente
-      scrub: 0.1, // Molto più reattivo
-      invalidateOnRefresh: true
-    }
-
-    gsap.to([path, pathGlow], {
-      strokeDashoffset: 0,
-      ease: 'none',
-      scrollTrigger
-    })
-
-    // Anima il marker finale solo alla fine
-    gsap.to(endMarker, {
-      opacity: 1,
-      scale: 1,
-      ease: 'back.out(1.7)',
+    // Timeline principale unica per sincronizzare linea e marker
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: '85% bottom', // Inizia verso la fine
+        start: 'top center',
         end: 'bottom bottom',
-        scrub: 0.1,
-        invalidateOnRefresh: true
+        scrub: 1, // Movimento fluido
+        invalidateOnRefresh: true,
       }
+    })
+
+    // 1. Anima la linea (disegna il path)
+    tl.to([path, pathGlow], {
+      strokeDashoffset: 0,
+      ease: 'none',
+    })
+
+    // 2. Anima il marker finale ESATTAMENTE quando la linea finisce
+    tl.to(endMarker, {
+      opacity: 1,
+      scale: 3, // Effetto "pop" grande
+      duration: 0.1, // Istantaneo ma con leggero ease
+      ease: 'back.out(2)',
     })
 
     return () => {
@@ -259,60 +256,53 @@ export function Services() {
             }}
             viewBox="0 0 200 4000"
             fill="none"
-            preserveAspectRatio="xMidYMin meet"
+            preserveAspectRatio="none" // Sync perfetto con l'altezza del container
           >
-            {/* Shadow/Glow effect - ottimizzato per iOS/Safari */}
+            {/* Shadow/Glow effect - ottimizzato: rimosso blur pesante per performance */}
             <path
               ref={pathGlowRef}
-              d="M100 0 Q100 80 100 160 Q100 240 100 320 Q120 420 140 520 Q160 620 140 720 Q120 820 100 920 Q80 1020 60 1120 Q40 1220 60 1320 Q80 1420 100 1520 Q120 1620 140 1720 Q160 1820 140 1920 Q120 2020 100 2120 Q80 2220 100 2320 Q120 2420 140 2520 Q160 2620 140 2720 Q120 2820 100 2920 Q80 3020 100 3120 Q120 3220 140 3320 Q150 3420 140 3520 Q130 3620 120 3720 Q110 3820 110 3920 Q110 3960 110 4000"
+              d="M100 0 Q 60 400 100 800 Q 140 1200 100 1600 Q 60 2000 100 2400 Q 140 2800 100 3200 Q 60 3400 100 3500"
               stroke="url(#gradient-glow)"
-              strokeWidth="32"
+              strokeWidth="20"
               strokeLinecap="round"
               fill="none"
-              style={{
-                filter: 'url(#blur-filter)'
-              }}
-              className="opacity-80 md:opacity-70"
+              style={{ filter: 'blur(10px)' }} // Blur CSS invece di SVG (più leggero)
+              className="opacity-50"
             />
             {/* Main path - molto più visibile su mobile */}
             <path
               ref={pathRef}
-              d="M100 0 Q100 80 100 160 Q100 240 100 320 Q120 420 140 520 Q160 620 140 720 Q120 820 100 920 Q80 1020 60 1120 Q40 1220 60 1320 Q80 1420 100 1520 Q120 1620 140 1720 Q160 1820 140 1920 Q120 2020 100 2120 Q80 2220 100 2320 Q120 2420 140 2520 Q160 2620 140 2720 Q120 2820 100 2920 Q80 3020 100 3120 Q120 3220 140 3320 Q150 3420 140 3520 Q130 3620 120 3720 Q110 3820 110 3920 Q110 3960 110 4000"
+              d="M100 0 Q 60 400 100 800 Q 140 1200 100 1600 Q 60 2000 100 2400 Q 140 2800 100 3200 Q 60 3400 100 3500"
               stroke="url(#gradient)"
-              strokeWidth="10"
+              strokeWidth="4"
               strokeLinecap="round"
               fill="none"
               className="opacity-100"
             />
 
             {/* Cerchio finale - appare solo alla fine dell'animazione */}
-            <g transform="translate(110, 4000)" style={{ transformOrigin: 'center' }}>
+            <g transform="translate(100, 3500)" style={{ transformOrigin: 'center' }}> // Esteso a 3500 (87% altezza)
               <circle r="12" fill="#f59e0b" opacity="0.3" style={{ filter: 'blur(4px)' }} />
               <circle ref={endMarkerRef} r="8" fill="#f59e0b" opacity="0.9" />
               <circle r="4" fill="#fff" opacity="0.9" />
             </g>
 
             <defs>
-              {/* Filtro blur ottimizzato per iOS/Safari */}
-              <filter id="blur-filter" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="24" />
-              </filter>
-
               <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#5ce1e6" stopOpacity="0.9" />
-                <stop offset="20%" stopColor="#aa2daa" stopOpacity="1" />
-                <stop offset="40%" stopColor="#5ce1e6" stopOpacity="1" />
-                <stop offset="60%" stopColor="#10b981" stopOpacity="1" />
-                <stop offset="80%" stopColor="#f59e0b" stopOpacity="1" />
-                <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.9" />
+                <stop offset="0%" stopColor="#5ce1e6" stopOpacity="0.4" />
+                <stop offset="20%" stopColor="#aa2daa" stopOpacity="0.4" />
+                <stop offset="40%" stopColor="#5ce1e6" stopOpacity="0.4" />
+                <stop offset="60%" stopColor="#10b981" stopOpacity="0.4" />
+                <stop offset="80%" stopColor="#f59e0b" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.4" />
               </linearGradient>
               <linearGradient id="gradient-glow" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#5ce1e6" stopOpacity="1" />
-                <stop offset="20%" stopColor="#aa2daa" stopOpacity="1" />
-                <stop offset="40%" stopColor="#5ce1e6" stopOpacity="1" />
-                <stop offset="60%" stopColor="#10b981" stopOpacity="1" />
-                <stop offset="80%" stopColor="#f59e0b" stopOpacity="1" />
-                <stop offset="100%" stopColor="#f59e0b" stopOpacity="1" />
+                <stop offset="0%" stopColor="#5ce1e6" stopOpacity="0.3" />
+                <stop offset="20%" stopColor="#aa2daa" stopOpacity="0.3" />
+                <stop offset="40%" stopColor="#5ce1e6" stopOpacity="0.3" />
+                <stop offset="60%" stopColor="#10b981" stopOpacity="0.3" />
+                <stop offset="80%" stopColor="#f59e0b" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.3" />
               </linearGradient>
             </defs>
           </svg>
@@ -334,10 +324,10 @@ export function Services() {
                       "relative z-10",
                       !isEven && "lg:col-start-2"
                     )}>
-                      {/* Phase Number */}
-                      <div className="flex items-center gap-4 mb-6">
+                      {/* Phase Number - CENTRALIZED */}
+                      <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-24 z-0">
                         <div className={cn(
-                          "text-8xl font-display font-bold opacity-20",
+                          "text-9xl font-display font-bold opacity-20 blur-sm select-none",
                           phase.color
                         )}>
                           {phase.number}
