@@ -261,18 +261,18 @@ export function Services() {
             fill="none"
             preserveAspectRatio="xMidYMin meet"
           >
-            {/* Shadow/Glow effect - extra visibile su mobile */}
+            {/* Shadow/Glow effect - ottimizzato per iOS/Safari */}
             <path
               ref={pathGlowRef}
               d="M100 0 Q100 80 100 160 Q100 240 100 320 Q120 420 140 520 Q160 620 140 720 Q120 820 100 920 Q80 1020 60 1120 Q40 1220 60 1320 Q80 1420 100 1520 Q120 1620 140 1720 Q160 1820 140 1920 Q120 2020 100 2120 Q80 2220 100 2320 Q120 2420 140 2520 Q160 2620 140 2720 Q120 2820 100 2920 Q80 3020 100 3120 Q120 3220 140 3320 Q150 3420 140 3520 Q130 3620 120 3720 Q110 3820 110 3920 Q110 3960 110 4000"
               stroke="url(#gradient-glow)"
-              strokeWidth="28"
+              strokeWidth="32"
               strokeLinecap="round"
               fill="none"
               style={{
-                filter: 'blur(20px)'
+                filter: 'url(#blur-filter)'
               }}
-              className="opacity-70 md:opacity-60"
+              className="opacity-80 md:opacity-70"
             />
             {/* Main path - molto più visibile su mobile */}
             <path
@@ -293,6 +293,11 @@ export function Services() {
             </g>
 
             <defs>
+              {/* Filtro blur ottimizzato per iOS/Safari */}
+              <filter id="blur-filter" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="24" />
+              </filter>
+
               <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stopColor="#5ce1e6" stopOpacity="0.9" />
                 <stop offset="20%" stopColor="#aa2daa" stopOpacity="1" />

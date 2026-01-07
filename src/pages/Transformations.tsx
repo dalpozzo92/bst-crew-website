@@ -68,22 +68,27 @@ export function Transformations() {
     }
   ]
 
-  // Auto-scroll infinito per la galleria
+  // Auto-scroll infinito per la galleria - ottimizzato per iOS
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef<number>(0)
   const isUserScrolling = useRef<boolean>(false)
   const pauseTimeoutRef = useRef<number | null>(null)
+  const lastTimeRef = useRef<number>(0)
 
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
 
-    const scrollSpeed = 0.5 // pixel per frame
+    const scrollSpeed = 1.2 // pixel per frame - aumentato per maggiore visibilità
     let animationFrameId: number
 
-    const scroll = () => {
-      if (!isPaused && !isUserScrolling.current && container) {
+    const scroll = (timestamp: number) => {
+      if (!lastTimeRef.current) lastTimeRef.current = timestamp
+      const deltaTime = timestamp - lastTimeRef.current
+
+      // Limita a 60fps per performance consistenti su iOS
+      if (deltaTime >= 16.67 && !isPaused && !isUserScrolling.current && container) {
         container.scrollLeft += scrollSpeed
 
         // Reset allo scroll quando arriva alla metà (dove finiscono le immagini originali)
@@ -91,17 +96,42 @@ export function Transformations() {
         if (container.scrollLeft >= maxScroll) {
           container.scrollLeft = 0
         }
+        lastTimeRef.current = timestamp
       }
+
       animationFrameId = requestAnimationFrame(scroll)
     }
 
-    animationFrameId = requestAnimationFrame(scroll)
+    // Gestione visibilità pagina per iOS
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId)
+        }
+      } else {
+        lastTimeRef.current = 0
+        animationFrameId = requestAnimationFrame(scroll)
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    // Forza il primo scroll per iOS
+    setTimeout(() => {
+      if (container) {
+        container.scrollLeft = 1
+        animationFrameId = requestAnimationFrame(scroll)
+      }
+    }, 100)
 
     return () => {
-      cancelAnimationFrame(animationFrameId)
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId)
+      }
       if (pauseTimeoutRef.current) {
         clearTimeout(pauseTimeoutRef.current)
       }
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [isPaused])
 
@@ -177,7 +207,9 @@ export function Transformations() {
                 onTouchEnd={handleTouchEnd}
                 style={{
                   scrollbarWidth: 'thin',
-                  scrollbarColor: '#6366f1 #1f2937'
+                  scrollbarColor: '#6366f1 #1f2937',
+                  scrollBehavior: 'auto',
+                  WebkitOverflowScrolling: 'touch'
                 }}
               >
                 {duplicatedTransformations.map((transformation, index) => (
