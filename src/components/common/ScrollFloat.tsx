@@ -100,8 +100,8 @@ export function ScrollFloat({
   }, [scrollContainerRef, animationDuration, ease, scrollStart, scrollEnd, stagger])
 
   return (
-    <h2 ref={containerRef} className={`scroll-float ${containerClassName}`}>
+    <h1 ref={containerRef} className={`scroll-float ${containerClassName}`}>
       <span className={`scroll-float-text ${textClassName}`}>{splitText}</span>
-    </h2>
+    </h1>
   )
 }

@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button'
 import { seoConfig } from '@/lib/seo-config'
 import { Card, CardContent } from '@/components/ui/card'
 import { getLocalBusinessSchema, generateSchemaScript } from '@/lib/schema-org'
-import { ScrollStackContainer } from '@/components/common/ScrollStack'
+import { StickyScroll, StickyScrollItem } from '@/components/common/StickyScroll'
 
 /**
  * Home Page
@@ -70,101 +70,106 @@ export function Home() {
           </AnimatedSection>
 
           <div className="max-w-4xl mx-auto mb-12">
-            <ScrollStackContainer gap="gap-6" stackOffset={30}>
+            <StickyScroll className="space-y-8">
               {/* Predizione Carichi */}
-              <Card className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-all">
-                <CardContent className="p-8">
-                  <div className="flex items-start space-x-4 mb-4">
-                    <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <TrendingUp className="w-6 h-6 text-primary-500" />
+              <StickyScrollItem>
+                <Card className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-all">
+                  <CardContent className="p-8">
+                    <div className="flex items-start space-x-4 mb-4">
+                      <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <TrendingUp className="w-6 h-6 text-primary-500" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-display font-bold text-white mb-2">
+                          Predizione Intelligente
+                        </h3>
+                        <p className="text-gray-400 text-sm mb-4">Algoritmo predittivo avanzato</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-display font-bold text-white mb-2">
-                        Predizione Intelligente
-                      </h3>
-                      <p className="text-gray-400 text-sm mb-4">Algoritmo predittivo avanzato</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed">
-                    Inserisci <span className="text-white font-semibold">ripetizioni e carichi</span> di
-                    ogni allenamento e il software calcola automaticamente i{' '}
-                    <span className="text-white font-semibold">carichi ottimali</span> per le settimane
-                    successive, basandosi sul tuo andamento e sui principi di periodizzazione scientifica.
-                  </p>
-                </CardContent>
-              </Card>
+                    <p className="text-gray-300 leading-relaxed">
+                      Inserisci <span className="text-white font-semibold">ripetizioni e carichi</span> di
+                      ogni allenamento e il software calcola automaticamente i{' '}
+                      <span className="text-white font-semibold">carichi ottimali</span> per le settimane
+                      successive, basandosi sul tuo andamento e sui principi di periodizzazione scientifica.
+                    </p>
+                  </CardContent>
+                </Card>
+              </StickyScrollItem>
 
               {/* Progressioni in Tempo Reale */}
-              <Card className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-all">
-                <CardContent className="p-8">
-                  <div className="flex items-start space-x-4 mb-4">
-                    <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <BarChart3 className="w-6 h-6 text-primary-500" />
+              <StickyScrollItem>
+                <Card className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-all">
+                  <CardContent className="p-8">
+                    <div className="flex items-start space-x-4 mb-4">
+                      <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <BarChart3 className="w-6 h-6 text-primary-500" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-display font-bold text-white mb-2">
+                          Dati in Tempo Reale
+                        </h3>
+                        <p className="text-gray-400 text-sm mb-4">Visualizzazione progressi</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-display font-bold text-white mb-2">
-                        Dati in Tempo Reale
-                      </h3>
-                      <p className="text-gray-400 text-sm mb-4">Visualizzazione progressi</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed">
-                    Monitora le tue <span className="text-white font-semibold">progressioni su ogni esercizio</span>{' '}
-                    con grafici interattivi. Vedi chiaramente quanto sei migliorato in forza, volume e
-                    consistenza settimana dopo settimana.
-                  </p>
-                </CardContent>
-              </Card>
+                    <p className="text-gray-300 leading-relaxed">
+                      Monitora le tue <span className="text-white font-semibold">progressioni su ogni esercizio</span>{' '}
+                      con grafici interattivi. Vedi chiaramente quanto sei migliorato in forza, volume e
+                      consistenza settimana dopo settimana.
+                    </p>
+                  </CardContent>
+                </Card>
+              </StickyScrollItem>
 
               {/* Notifiche Stalli */}
-              <Card className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-all">
-                <CardContent className="p-8">
-                  <div className="flex items-start space-x-4 mb-4">
-                    <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Bell className="w-6 h-6 text-primary-500" />
+              <StickyScrollItem>
+                <Card className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-all">
+                  <CardContent className="p-8">
+                    <div className="flex items-start space-x-4 mb-4">
+                      <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <Bell className="w-6 h-6 text-primary-500" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-display font-bold text-white mb-2">
+                          Notifiche Intelligenti
+                        </h3>
+                        <p className="text-gray-400 text-sm mb-4">Rilevamento automatico stalli</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-display font-bold text-white mb-2">
-                        Notifiche Intelligenti
-                      </h3>
-                      <p className="text-gray-400 text-sm mb-4">Rilevamento automatico stalli</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed">
-                    Il sistema rileva automaticamente gli <span className="text-white font-semibold">stalli
-                    di performance</span> e ti notifica immediatamente. Nessun plateau passerà inosservato:
-                    intervengo subito con strategie mirate per farti ripartire.
-                  </p>
-                </CardContent>
-              </Card>
+                    <p className="text-gray-300 leading-relaxed">
+                      Il sistema rileva automaticamente gli <span className="text-white font-semibold">stalli
+                      di performance</span> e ti notifica immediatamente. Nessun plateau passerà inosservato:
+                      intervengo subito con strategie mirate per farti ripartire.
+                    </p>
+                  </CardContent>
+                </Card>
+              </StickyScrollItem>
 
               {/* Chat Integrata */}
-              <Card className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-all">
-                <CardContent className="p-8">
-                  <div className="flex items-start space-x-4 mb-4">
-                    <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <MessageCircle className="w-6 h-6 text-primary-500" />
+              <StickyScrollItem>
+                <Card className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-all">
+                  <CardContent className="p-8">
+                    <div className="flex items-start space-x-4 mb-4">
+                      <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <MessageCircle className="w-6 h-6 text-primary-500" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-display font-bold text-white mb-2">
+                          Chat Diretta con il Coach
+                        </h3>
+                        <p className="text-gray-400 text-sm mb-4">Supporto continuo</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-display font-bold text-white mb-2">
-                        Chat Diretta con il Coach
-                      </h3>
-                      <p className="text-gray-400 text-sm mb-4">Supporto continuo</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed">
-                    <span className="text-white font-semibold">Comunicazione diretta integrata</span> nel
-                    software. Domande, dubbi, feedback: sono sempre a portata di messaggio per guidarti
-                    in ogni fase del percorso.
-                  </p>
-                </CardContent>
-              </Card>
-            </ScrollStackContainer>
-          </div>
+                    <p className="text-gray-300 leading-relaxed">
+                      <span className="text-white font-semibold">Comunicazione diretta integrata</span> nel
+                      software. Domande, dubbi, feedback: sono sempre a portata di messaggio per guidarti
+                      in ogni fase del percorso.
+                    </p>
+                  </CardContent>
+                </Card>
+              </StickyScrollItem>
 
           {/* Analisi Volume */}
-          <AnimatedSection delay={0.5}>
-            <div className="max-w-4xl mx-auto">
+          <StickyScrollItem>
               <Card className="bg-gradient-to-br from-primary-500/10 to-primary-600/5 border-primary-500/20">
                 <CardContent className="p-8 md:p-12">
                   <div className="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-6">
@@ -185,12 +190,14 @@ export function Home() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
-          </AnimatedSection>
+            </StickyScrollItem>
+            </StickyScroll>
+
+          </div>
 
           {/* Conclusione Software */}
           <AnimatedSection delay={0.6}>
-            <div className="max-w-3xl mx-auto text-center mt-16">
+            <div className="max-w-3xl mx-auto text-center mt-[500px] md:mt-[300px]">
               <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-light">
                 Questo software è il <span className="text-primary-500 font-semibold">cuore della mia metodologia</span>.
                 Non lasciamo nulla al caso: ogni dato, ogni ripetizione, ogni progressione viene tracciata,
@@ -200,7 +207,6 @@ export function Home() {
           </AnimatedSection>
         </div>
       </section>
-
 
       {/* Book Section */}
       <BookSection />

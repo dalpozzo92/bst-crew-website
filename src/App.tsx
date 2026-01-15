@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { Layout } from '@/components/layout/Layout'
 import { ScrollToTop } from '@/components/common/ScrollToTop'
@@ -10,7 +10,6 @@ import { Services } from '@/pages/Services'
 import { Contact } from '@/pages/Contact'
 import { FAQ } from '@/pages/FAQ'
 import { Transformations } from '@/pages/Transformations'
-import { PersonalTrainerPergine } from '@/pages/PersonalTrainerPergine'
 import { Privacy } from '@/pages/Privacy'
 import { CookiePolicy } from '@/pages/CookiePolicy'
 
@@ -46,15 +45,12 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/chi-sono" element={<About />} />
             <Route path="/servizi" element={<Services />} />
             <Route path="/contatti" element={<Contact />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/trasformazioni" element={<Transformations />} />
-            <Route
-              path="/personal-trainer-pergine-valsugana"
-              element={<PersonalTrainerPergine />}
-            />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
 

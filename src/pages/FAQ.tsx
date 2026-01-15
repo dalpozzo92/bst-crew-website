@@ -28,7 +28,7 @@ export function FAQ() {
 
   return (
     <>
-      <SEO config={seoConfig.personalTrainerPergine} schema={JSON.stringify(faqSchema, null, 2)} />
+      <SEO config={seoConfig.faq} schema={JSON.stringify(faqSchema, null, 2)} />
 
       {/* Hero Section */}
       <section className="section-padding">

@@ -37,6 +37,7 @@ interface Phase {
   number: string
   title: string
   subtitle: string
+  description: string
   duration: string
   icon: React.ElementType
   image?: string
@@ -50,20 +51,20 @@ const phases: Phase[] = [
     id: 'kickoff',
     number: '01',
     title: 'INGRESSO & SETUP',
-    subtitle: 'Fondamenta del Tuo Percorso',
-    duration: 'Settimana 0-2',
+    subtitle: 'Architettura del Risultato',
+    description: 'In questa fase non ci limitiamo a darti una scheda: costruiamo le fondamenta del tuo nuovo fisico.',
+    duration: 'Settimana 0',
     icon: Rocket,
     image: getAssetPath('/images/coaching.webp'),
     color: 'text-primary-500',
     gradient: 'from-primary-500/20 to-primary-600/20',
     features: [
-      'Call Kickoff iniziale (45-60 min) per definire obiettivi e analisi storico',
+      'Call iniziale (45-60 min): Analisi profonda del tuo storico e dei tuoi obiettivi per non lasciare nulla al caso.',
       'Questionario strutturato su allenamento, stile di vita e abitudini',
-      'Creazione Programma Avanzato Personalizzato',
-      '2 sessioni pratiche in palestra (1h ciascuna) per set-up tecnico completo',
-      'Accesso esclusivo al Libro BST sulla nutrizione (educativo)',
-      'Accesso esclusivo alla GUIDA sull\'allenamento BST',
-      '1 ora di formazione nutrizionale personale per autogestione consapevole',
+      'Analisi Biomeccanica Individuale: Valutazione della tua struttura e mobilità per un programma cucito sulla tua anatomia',
+      'DNA Tecnico (2 Sessioni in palestra): 2 ore dal vivo per settare la tua tecnica ed eliminare ogni rischio di infortunio',
+      'Il Toolkit BST: Accesso immediato al Libro BST (Nutrizione) e alla Guida Allenamento per capire la scienza dietro il tuo sforzo.',
+      'Masterclass Nutrizionale (1 ora): Formazione personale per renderti consapevole e autonomo nella gestione dei tuoi macronutrienti.',
       'Linee guida alimentari personalizzate per supportare i tuoi obiettivi'
     ]
   },
@@ -72,37 +73,38 @@ const phases: Phase[] = [
     number: '02',
     title: 'ALLENAMENTO GUIDATO',
     subtitle: 'Costruisci le Fondamenta',
+    description: 'Entriamo nel vivo con il monitoraggio scientifico tramite il nostro software proprietario.',
     duration: 'Mesi 1-3',
     icon: Dumbbell,
     image: getAssetPath('/images/coaching1-1.webp'),
     color: 'text-accent-500',
     gradient: 'from-accent-500/20 to-accent-600/20',
     features: [
-      'Programma di allenamento con progressione settimanale automatica dei carichi',
+      'BST Data-Driven System: Stesura percorso personalizzato con carichi e volumi calcolati automaticamente dal nostro algoritmo per garantirti miglioramenti settimanali.',
       'Focus su tecnica impeccabile, volume progressivo e recupero ottimale',
-      'Revisione video esercizi: invii i tuoi video, ricevi feedback personalizzato',
-      'Supporto continuativo tramite chat/app per ogni dubbio',
-      'Check strutturato ogni 6 settimane (1h, in palestra o call)',
+      'Video-Feedback Analitico: Invii i tuoi video, ricevi correzioni tecniche basate sulla biomeccanica applicata.',
+      'Connessione Diretta: Supporto via chat/app per risolvere ogni dubbio in tempo reale.',
+      'Checkpoint Strategico (Ogni 6 sett.): 1 ora di analisi dati (in palestra o call) per verificare i risultati e ricalibrare il motore del tuo allenamento.',
       'Analisi progressi dettagliata e aggiustamenti mirati al programma',
-      'Monitoraggio costante dei feedback per personalizzazione massima'
+      'Monitoraggio costante dei feedback per personalizzazione massima anche durante il percorso'
     ]
   },
   {
     id: 'evolution',
     number: '03',
     title: 'EVOLUZIONE',
-    subtitle: 'Porta il Fisico al Livello Successivo',
+    subtitle: 'Al Di Sopra della Media',
+    description: 'Oltre i plateau. Qui è dove il corpo si trasforma davvero e la mente segue.',
     duration: 'Mesi 4-6',
     icon: TrendingUp,
     color: 'text-emerald-500',
     gradient: 'from-emerald-500/20 to-emerald-600/20',
     features: [
-      'Nuovo programma avanzato (secondo ciclo) basato sui progressi ottenuti',
-      'Continuazione revisione video esercizi con feedback tecnico avanzato',
+      'Programmazione di Secondo Ciclo: Nuovo stimolo avanzato basato sui dati reali raccolti nei primi 3 mesi.',
       'Check strutturato ogni 6 settimane (1h) per monitoraggio e ottimizzazione',
-      'Tecniche avanzate di allenamento per superare plateau e stalli',
+      'Verso l’Autonomia: Ti insegniamo a leggere i feedback del tuo corpo come farebbe un professionista.',
       'Focus crescente sull\'autonomia: impari a gestirti in modo consapevole',
-      'Perfezionamento della tecnica su esercizi complessi e multi-articolari',
+      'Focus High-Performance: Perfezionamento degli schemi motori complessi per spremere ogni fibra muscolare.',
       'Strategie mentali per mantenere motivazione e disciplina alta'
     ]
   },
@@ -110,15 +112,16 @@ const phases: Phase[] = [
     id: 'consolidation',
     number: '04',
     title: 'CONSOLIDAMENTO & USCITA',
-    subtitle: 'Mantieni i Risultati per Sempre',
+    subtitle: 'Il Tuo Nuovo Standard',
+    description: 'Non è un addio, ma la certificazione che sei diventato un atleta consapevole.',
     duration: 'Fine percorso',
     icon: Trophy,
     color: 'text-amber-500',
     gradient: 'from-amber-500/20 to-amber-600/20',
     features: [
-      'Report finale completo dei progressi con analisi dettagliata',
-      'Gamification: percentuale completamento, stalli superati, progressioni',
-      'Attestato BST Crew ufficiale di completamento percorso',
+      'Final Report BST: Analisi dettagliata di ogni chilogrammo sollevato e di ogni centimetro perso o guadagnato.',
+      'Gamification & Achievements: Visualizza le percentuali di completamento e gli stalli che abbiamo sconfitto insieme.',
+      'Attestato Ufficiale BST Crew: Il riconoscimento del tuo impegno e del tuo ingresso nell\'élite dei nostri atleti.',
       'Possibilità di rinnovo a condizioni agevolate per continuare la crescita',
       'Accesso lifetime al materiale formativo esclusivo ricevuto'
     ]
@@ -353,8 +356,11 @@ export function Services() {
                             </p>
                           </div>
                         </div>
-                        <p className="text-xl text-gray-300 font-light">
+                        <h3 className="text-xl text-gray-300 font-semibold mb-2">
                           {phase.subtitle}
+                        </h3>
+                        <p className="text-xl text-gray-300 font-light">
+                          {phase.description}
                         </p>
                       </div>
 

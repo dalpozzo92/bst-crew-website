@@ -135,7 +135,7 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="mt-20 grid grid-cols-3 gap-6 max-w-xl mx-auto"
+              className="mt-12 grid grid-cols-3 gap-4 max-w-xl mx-auto"
             >
               <StatCounter end={10} suffix="+" label="Anni Esperienza" duration={2500} />
               <StatCounter end={200} suffix="+" label="Clienti Soddisfatti" duration={2500} />

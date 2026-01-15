@@ -46,7 +46,7 @@ export function WhyChooseMe() {
             Perché Scegliere Me
           </ScrollFloat>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Un metodo di lavoro professionale, basato su scienza e personalizzazione,
+            Un metodo di lavoro professionale, innovativo, basato su scienza e personalizzazione,
             per portarti ai risultati che desideri.
           </p>
         </AnimatedSection>

@@ -17,11 +17,12 @@ const navigation: NavLink[] = [
   { label: 'Contatti', href: '/contatti' },
 ]
 
-/**npx sh
+/**
  * Header component con navigation e mobile menu
  *
  * Caratteristiche:
- * - Logo placeholder (da sostituire con logo reale)
+ * - Completamente nascosto nella homepage quando non scrollato
+ * - Appare con dissolvenza quando si scrolla
  * - Navigation responsive
  * - Mobile menu con Dialog (shadcn/ui)
  * - Scroll behavior con background blur on scroll
@@ -37,10 +38,13 @@ export function Header() {
   // Scroll listener per background blur effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 50)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    // Controlla subito lo stato iniziale
+    handleScroll()
+    
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -49,37 +53,39 @@ export function Header() {
     setMobileMenuOpen(false)
   }, [location.pathname])
 
+  // Reset scroll state quando cambia pagina
+  useEffect(() => {
+    setIsScrolled(window.scrollY > 50)
+  }, [location.pathname])
+
   const isActive = (href: string) => {
     return location.pathname === href
   }
 
   // Nascondi completamente l'header nella homepage quando non scrollato
-  const isHomePage = location.pathname === '/'
-  const shouldHideHeader = isHomePage && !isScrolled
+  const isHomePage = location.pathname === '/' || location.pathname === '/home'
+  const shouldShowHeader = !isHomePage || isScrolled
 
   return (
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-40 transition-all duration-500',
         isScrolled
-          ? 'bg-dark-900/90 backdrop-blur-xl border-b border-white/[0.08]'
+          ? 'bg-dark-900/95 backdrop-blur-xl border-b border-white/[0.08]'
           : 'bg-dark-900/50 backdrop-blur-lg border-b border-white/[0.04]',
-        shouldHideHeader
-          ? 'opacity-0 -translate-y-full pointer-events-none'
-          : 'opacity-100 translate-y-0 pointer-events-auto'
+        shouldShowHeader
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-full pointer-events-none'
       )}
     >
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16">
-          {/* Logo - Nascosto nella homepage finché non si scrolla */}
+          {/* Logo */}
           <Link to="/" className="flex items-center">
             <img
               src={getAssetPath('/images/logo.webp')}
               alt="BST Crew Logo"
-              className={cn(
-                "h-9 w-auto object-contain transition-opacity duration-300",
-                location.pathname === '/' && !isScrolled ? 'opacity-0' : 'opacity-100'
-              )}
+              className="h-9 w-auto object-contain"
             />
           </Link>
 

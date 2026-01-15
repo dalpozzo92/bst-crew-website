@@ -7,20 +7,11 @@ import { Card, CardContent } from '@/components/ui/card'
 import { seoConfig } from '@/lib/seo-config'
 import { getPersonSchema, generateSchemaScript } from '@/lib/schema-org'
 import { getAssetPath } from '@/lib/assets'
-import { ScrollStackContainer } from '@/components/common/ScrollStack'
+import { StickyScroll, StickyScrollItem } from '@/components/common/StickyScroll'
 import { ScrollFloat } from '@/components/common/ScrollFloat'
-/**
- * About Page (Chi Sono)
- *
- * Contenuto:
- * - Presentazione professionale
- * - Approccio e filosofia
- * - Certificazioni (placeholder)
- * - Metodo di lavoro
- *
- * SEO:
- * - Schema.org Person per personal branding
- */
+
+// ... existing code ...
+
 export function About() {
   const personSchema = getPersonSchema()
 
@@ -71,12 +62,9 @@ export function About() {
 
             {/* Content */}
             <AnimatedSection animation="fadeInRight">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 tracking-tight">
               <ScrollFloat containerClassName="mb-6">
-               
                 Chi Sono
               </ScrollFloat>
-              </h1>
               <div className="space-y-4 text-lg text-gray-300 leading-relaxed font-light">
                 <p>
                   Mi chiamo <span className="text-white font-normal">Nicola Dal Pozzo</span> e sono un{' '}
@@ -122,32 +110,34 @@ export function About() {
           </AnimatedSection>
 
           <div className="max-w-3xl mx-auto">
-            <ScrollStackContainer gap="gap-6" stackOffset={25}>
+            <StickyScroll className="space-y-8">
               {values.map((value, index) => {
                 const Icon = value.icon
                 return (
-                  <Card key={index} className="text-center hover:shadow-lg transition-shadow bg-dark-900 border-white/[0.08]">
-                    <CardContent className="pt-8 pb-6">
-                      <div className="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Icon className="w-8 h-8 text-primary-500" />
-                      </div>
-                      <h3 className="text-xl font-display font-bold text-white mb-3">
-                        {value.title}
-                      </h3>
-                      <p className="text-gray-400 leading-relaxed">
-                        {value.description}
-                      </p>
-                    </CardContent>
-                  </Card>
+                  <StickyScrollItem key={index}>
+                    <Card className="text-center hover:shadow-lg transition-shadow bg-dark-900 border-white/[0.08]">
+                      <CardContent className="pt-8 pb-6">
+                        <div className="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <Icon className="w-8 h-8 text-primary-500" />
+                        </div>
+                        <h3 className="text-xl font-display font-bold text-white mb-3">
+                          {value.title}
+                        </h3>
+                        <p className="text-gray-400 leading-relaxed">
+                          {value.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </StickyScrollItem>
                 )
               })}
-            </ScrollStackContainer>
+            </StickyScroll>
           </div>
         </div>
       </section>
 
       {/* Certifications Section */}
-      <section className="section-padding">
+      <section className="section-padding mt-[150px] md:mt-[50px]">
         <div className="container-custom">
           <AnimatedSection className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
@@ -159,97 +149,101 @@ export function About() {
           </AnimatedSection>
 
           <div className="max-w-4xl mx-auto">
-            <ScrollStackContainer gap="gap-8" stackOffset={35}>
+            <StickyScroll className="space-y-8">
               {/* Certificazioni Card */}
-              <div className="bg-dark-900 border border-white/[0.08] rounded-2xl p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center">
-                    <Award className="w-6 h-6 text-primary-500" />
+              <StickyScrollItem>
+                <div className="bg-dark-900 border border-white/[0.08] rounded-2xl p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center">
+                      <Award className="w-6 h-6 text-primary-500" />
+                    </div>
+                    <h3 className="text-2xl font-display font-bold text-white">Certificazioni</h3>
                   </div>
-                  <h3 className="text-2xl font-display font-bold text-white">Certificazioni</h3>
+                  <div className="space-y-4">
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Personal Trainer e Bodybuilding – <span className="text-white font-medium">NSCA</span>
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Allenamento Avanzato & Biomeccanica – <span className="text-white font-medium">RTA Resistance Training Academy</span>
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Specialista Squat – <span className="text-white font-medium">RTA Resistance Training Academy</span>
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Biomeccanica avanzata – <span className="text-white font-medium">Ingegneria Anabolica di Noha Rabasco</span>
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Nutrizione Sportiva – <span className="text-white font-medium">ISSN, International Society of Sports Nutrition</span>
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  <div className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed">
-                      Personal Trainer e Bodybuilding – <span className="text-white font-medium">NSCA</span>
-                    </p>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed">
-                      Allenamento Avanzato & Biomeccanica – <span className="text-white font-medium">RTA Resistance Training Academy</span>
-                    </p>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed">
-                      Specialista Squat – <span className="text-white font-medium">RTA Resistance Training Academy</span>
-                    </p>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed">
-                      Biomeccanica avanzata – <span className="text-white font-medium">Ingegneria Anabolica di Noha Rabasco</span>
-                    </p>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed">
-                      Nutrizione Sportiva – <span className="text-white font-medium">ISSN, International Society of Sports Nutrition</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
+              </StickyScrollItem>
 
               {/* Specializzazioni Card */}
-              <div className="bg-dark-900 border border-white/[0.08] rounded-2xl p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center">
-                    <BookOpen className="w-6 h-6 text-primary-500" />
+              <StickyScrollItem>
+                <div className="bg-dark-900 border border-white/[0.08] rounded-2xl p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center">
+                      <BookOpen className="w-6 h-6 text-primary-500" />
+                    </div>
+                    <h3 className="text-2xl font-display font-bold text-white">Specializzazioni</h3>
                   </div>
-                  <h3 className="text-2xl font-display font-bold text-white">Specializzazioni</h3>
+                  <div className="space-y-4">
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Biomeccanica applicata all'allenamento
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Programmazione avanzata per ipertrofia e performance
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Consulenze nutrizionali personalizzate
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Strategie di progressione e monitoraggio dei carichi
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Approccio integrato allenamento + nutrizione
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  <div className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed">
-                      Biomeccanica applicata all'allenamento
-                    </p>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed">
-                      Programmazione avanzata per ipertrofia e performance
-                    </p>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed">
-                      Consulenze nutrizionali personalizzate
-                    </p>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed">
-                      Strategie di progressione e monitoraggio dei carichi
-                    </p>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed">
-                      Approccio integrato allenamento + nutrizione
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </ScrollStackContainer>
+              </StickyScrollItem>
+            </StickyScroll>
           </div>
         </div>
       </section>
 
       {/* Philosophy BST Crew Section */}
-      <section className="section-padding bg-gradient-to-b from-dark-800/30 to-transparent">
+      <section className="section-padding bg-gradient-to-b from-dark-800/30 to-transparent mt-[350px] md:mt-[100px]">
         <div className="container-custom">
           <AnimatedSection className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
@@ -337,7 +331,6 @@ export function About() {
         </div>
       </section>
 
-     
       {/* CTA Section */}
       <section className="section-padding">
         <AnimatedSection className="container-custom text-center">

@@ -82,22 +82,22 @@ export const seoConfig: Record<string, SEOConfig> = {
     ]
   },
 
-  personalTrainerPergine: {
-    title: 'Personal Trainer a Pergine Valsugana: Trasforma il Tuo Fisico | BST Crew',
-    description: 'Cerchi un personal trainer a Pergine Valsugana o Trento? Allenamenti personalizzati per ipertrofia, dimagrimento e ricomposizione corporea. Servizi in palestra e online.',
-    canonical: `${SITE_URL}/personal-trainer-pergine-valsugana`,
-    ogImage: `${SITE_URL}/images/hero-profile.webp`,
-    ogType: 'website',
-    keywords: [
-      'personal trainer Pergine Valsugana',
-      'personal trainer Trento',
-      'coach palestra Pergine',
-      'personal trainer online Trentino',
-      'allenamento personalizzato Pergine',
-      'ipertrofia Valsugana',
-      'dimagrimento Trento'
-    ]
-  },
+  // personalTrainerPergine: {
+  //   title: 'Personal Trainer a Pergine Valsugana: Trasforma il Tuo Fisico | BST Crew',
+  //   description: 'Cerchi un personal trainer a Pergine Valsugana o Trento? Allenamenti personalizzati per ipertrofia, dimagrimento e ricomposizione corporea. Servizi in palestra e online.',
+  //   canonical: `${SITE_URL}/personal-trainer-pergine-valsugana`,
+  //   ogImage: `${SITE_URL}/images/hero-profile.webp`,
+  //   ogType: 'website',
+  //   keywords: [
+  //     'personal trainer Pergine Valsugana',
+  //     'personal trainer Trento',
+  //     'coach palestra Pergine',
+  //     'personal trainer online Trentino',
+  //     'allenamento personalizzato Pergine',
+  //     'ipertrofia Valsugana',
+  //     'dimagrimento Trento'
+  //   ]
+  // },
 
   privacy: {
     title: 'Privacy Policy | BST Crew Personal Trainer',

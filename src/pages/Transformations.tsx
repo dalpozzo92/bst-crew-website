@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { Target, TrendingUp, Award, CheckCircle2, ArrowRight } from 'lucide-react'
+import { Target, TrendingUp, Award, CheckCircle2, ArrowRight, Clock, Book, Zap, Users } from 'lucide-react'
 import { SEO } from '@/components/common/SEO'
 import { AnimatedSection } from '@/components/common/AnimatedSection'
 import { ScrollFloat } from '@/components/common/ScrollFloat'
@@ -10,12 +10,14 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getAssetPath } from '@/lib/assets'
 import { seoConfig } from '@/lib/seo-config'
-import { ScrollStackContainer } from '@/components/common/ScrollStack'
+import { StickyScroll, StickyScrollItem } from '@/components/common/StickyScroll'
+
 /**
  * Transformations Page
  *
  * Mostra le trasformazioni dei clienti con:
  * - Carousel interattivo di immagini prima/dopo
+ * - Casi studio dettagliati
  * - Descrizione persuasiva dei risultati
  * - Benefici e garanzie
  * - CTA verso consulenza
@@ -50,6 +52,42 @@ export function Transformations() {
     }
   ]
 
+  // Casi studio dettagliati
+  const caseStudies = [
+    {
+      icon: Clock,
+      name: 'Marco, 34 anni',
+      challenge: 'Poco Tempo Disponibile',
+      result: '+8kg di massa muscolare in 6 mesi',
+      description: 'Lavoro d\'ufficio, famiglia, solo 3 allenamenti a settimana. Marco pensava di non avere abbastanza tempo per vedere risultati. Con un programma ultra-ottimizzato da 45 minuti e una strategia nutrizionale sostenibile, ha costruito 8kg di muscolo puro lavorando meno ore in palestra di quanto pensasse necessario.',
+      highlight: 'Allenamenti da 45 minuti, 3 volte a settimana'
+    },
+    {
+      icon: Book,
+      name: 'Luca, 28 anni',
+      challenge: 'Zero Conoscenze di Nutrizione',
+      result: '+5kg di muscoli senza dieta rigida',
+      description: 'Luca non aveva mai seguito una dieta in vita sua. Grazie al libro di nutrizione incluso nel coaching, ha imparato i principi fondamentali e li ha applicati con flessibilità. Risultato: 5kg di massa muscolare aumentando la consapevolezza alimentare, senza rinunce estreme o conteggi ossessivi.',
+      highlight: 'Nessuna dieta rigida, solo consapevolezza'
+    },
+    {
+      icon: Zap,
+      name: 'Andrea, 42 anni',
+      challenge: 'Metabolismo Lento e Stallo',
+      result: '-12kg di grasso, forza raddoppiata',
+      description: 'Dopo anni di diete yo-yo e metabolismo "bloccato", Andrea era convinto di non poter più dimagrire. Con una strategia di reverse diet e programmazione scientifica dell\'allenamento, ha perso 12kg di grasso puro e raddoppiato la forza su tutti gli esercizi principali in 8 mesi.',
+      highlight: 'Da metabolismo bloccato a macchina brucia-grassi'
+    },
+    {
+      icon: Users,
+      name: 'Davide, 25 anni',
+      challenge: 'Genetica "Sfavorevole"',
+      result: 'Da skinny a +15kg di muscolo in 12 mesi',
+      description: 'Davide si definiva un "hardgainer": mangiava tanto ma non cresceva mai. Con il software predittivo abbiamo monitorato ogni variabile, progressione e volume di allenamento. Ha scoperto che il problema non era la genetica, ma la mancanza di strategia. 15kg di massa muscolare in un anno lo dimostrano.',
+      highlight: 'La genetica non è una scusa, serve il metodo giusto'
+    }
+  ]
+
   const benefits = [
     {
       icon: Target,
@@ -80,18 +118,16 @@ export function Transformations() {
     const container = scrollContainerRef.current
     if (!container) return
 
-    const scrollSpeed = 1.2 // pixel per frame - aumentato per maggiore visibilità
+    const scrollSpeed = 1.2
     let animationFrameId: number
 
     const scroll = (timestamp: number) => {
       if (!lastTimeRef.current) lastTimeRef.current = timestamp
       const deltaTime = timestamp - lastTimeRef.current
 
-      // Limita a 60fps per performance consistenti su iOS
       if (deltaTime >= 16.67 && !isPaused && !isUserScrolling.current && container) {
         container.scrollLeft += scrollSpeed
 
-        // Reset allo scroll quando arriva alla metà (dove finiscono le immagini originali)
         const maxScroll = container.scrollWidth / 2
         if (container.scrollLeft >= maxScroll) {
           container.scrollLeft = 0
@@ -102,7 +138,6 @@ export function Transformations() {
       animationFrameId = requestAnimationFrame(scroll)
     }
 
-    // Gestione visibilità pagina per iOS
     const handleVisibilityChange = () => {
       if (document.hidden) {
         if (animationFrameId) {
@@ -116,7 +151,6 @@ export function Transformations() {
 
     document.addEventListener('visibilitychange', handleVisibilityChange)
 
-    // Forza il primo scroll per iOS
     setTimeout(() => {
       if (container) {
         container.scrollLeft = 1
@@ -144,7 +178,6 @@ export function Transformations() {
     const touchCurrentX = e.touches[0].clientX
     const diff = Math.abs(touchCurrentX - touchStartX.current)
 
-    // Se l'utente ha mosso il dito di almeno 10px, considera che sta scrollando
     if (diff > 10) {
       isUserScrolling.current = true
       setIsPaused(true)
@@ -152,7 +185,6 @@ export function Transformations() {
   }
 
   const handleTouchEnd = () => {
-    // Riprendi lo scroll automatico dopo 2 secondi
     if (pauseTimeoutRef.current) {
       clearTimeout(pauseTimeoutRef.current)
     }
@@ -162,7 +194,6 @@ export function Transformations() {
     }, 2000)
   }
 
-  // Duplica le trasformazioni per l'effetto infinite loop
   const duplicatedTransformations = [...transformations, ...transformations, ...transformations]
 
   return (
@@ -176,9 +207,9 @@ export function Transformations() {
             <Badge className="mb-6 bg-primary-500/10 text-primary-500 hover:bg-primary-500/20 border-primary-500/20">
               Risultati Reali
             </Badge>
-            <ScrollFloat containerClassName="mb-6">
-              Trasformazioni Prima e Dopo
-            </ScrollFloat>
+              <ScrollFloat containerClassName="mb-6">
+                Trasformazioni Prima e Dopo
+              </ScrollFloat>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
               Questi non sono sogni, sono risultati concreti ottenuti dai miei clienti
               con <span className="text-white font-normal">metodo scientifico</span>,{' '}
@@ -193,9 +224,6 @@ export function Transformations() {
       <section className="section-padding overflow-hidden">
         <div className="container-custom">
           <AnimatedSection>
-            {/* Scroll Hint */}
-
-            {/* Horizontal Scroll Container con Auto-scroll */}
             <div className="relative">
               <div
                 ref={scrollContainerRef}
@@ -230,7 +258,6 @@ export function Transformations() {
                             className="w-full h-full object-contain"
                             loading="lazy"
                           />
-                          {/* Gradient Overlay on Hover */}
                           <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                       </CardContent>
@@ -240,7 +267,6 @@ export function Transformations() {
               </div>
             </div>
 
-            {/* Custom Scrollbar Styles */}
             <style>{`
               .overflow-x-auto::-webkit-scrollbar {
                 height: 8px;
@@ -261,29 +287,91 @@ export function Transformations() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="section-padding bg-gradient-to-b from-dark-800/30 to-transparent">
+        <div className="container-custom">
+          <AnimatedSection className="text-center mb-16">
+              <ScrollFloat containerClassName="mb-6">
+                Storie di Successo Reali
+              </ScrollFloat>
+            <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+              Ogni persona ha sfide diverse. Scopri come ho aiutato clienti con situazioni
+              simili alla tua a raggiungere risultati straordinari.
+            </p>
+          </AnimatedSection>
+
+          <div className="max-w-5xl mx-auto">
+            <StickyScroll className="space-y-8">
+              {caseStudies.map((caseStudy, index) => {
+                const Icon = caseStudy.icon
+                return (
+                  <StickyScrollItem key={index}>
+                    <Card className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-all">
+                      <CardContent className="p-8 md:p-10">
+                        <div className="flex flex-col md:flex-row md:items-start gap-6">
+                          {/* Icon */}
+                          <div className="w-16 h-16 bg-primary-500/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <Icon className="w-8 h-8 text-primary-500" />
+                          </div>
+
+                          {/* Content */}
+                          <div className="flex-1">
+                            <div className="mb-4">
+                              <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-2">
+                                {caseStudy.name}
+                              </h3>
+                              <div className="flex flex-wrap gap-3 mb-3">
+                                <Badge variant="outline" className="border-red-500/30 text-red-400 bg-red-500/5">
+                                  Sfida: {caseStudy.challenge}
+                                </Badge>
+                                <Badge variant="outline" className="border-primary-500/30 text-primary-400 bg-primary-500/5">
+                                  Risultato: {caseStudy.result}
+                                </Badge>
+                              </div>
+                            </div>
+
+                            <p className="text-gray-300 leading-relaxed mb-4 text-lg">
+                              {caseStudy.description}
+                            </p>
+
+                            <div className="bg-primary-500/5 border border-primary-500/20 rounded-xl p-4">
+                              <p className="text-primary-400 font-medium flex items-start">
+                                <CheckCircle2 className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" />
+                                {caseStudy.highlight}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </StickyScrollItem>
+                )
+              })}
+            </StickyScroll>
+          </div>
+        </div>
+      </section>
+
       {/* Benefits Section */}
-      <section className="section-padding">
+      <section className="section-padding mt-[650px] md:mt-[150px]">
         <div className="container-custom">
           <AnimatedSection className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
                 <ScrollFloat containerClassName="mb-6">
-
                   Come Ottenere Risultati Come Questi
                 </ScrollFloat>
-              </h2>
               <p className="text-lg text-gray-400 max-w-3xl mx-auto">
                 Le trasformazioni che vedi non sono frutto della fortuna. Sono il risultato
                 di un metodo collaudato che combina scienza, personalizzazione e supporto continuo.
               </p>
             </div>
 
-            <div className="max-w-3xl mx-auto mb-12">
-              <ScrollStackContainer gap="gap-6" stackOffset={30}>
-                {benefits.map((benefit, index) => {
-                  const Icon = benefit.icon
-                  return (
-                    <Card key={index} className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-colors">
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              {benefits.map((benefit, index) => {
+                const Icon = benefit.icon
+                return (
+                  <AnimatedSection key={index} delay={index * 0.1}>
+                    <Card className="bg-dark-900 border-white/[0.08] hover:border-primary-500/30 transition-colors h-full">
                       <CardContent className="p-6">
                         <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center mb-4">
                           <Icon className="w-6 h-6 text-primary-500" />
@@ -296,9 +384,9 @@ export function Transformations() {
                         </p>
                       </CardContent>
                     </Card>
-                  )
-                })}
-              </ScrollStackContainer>
+                  </AnimatedSection>
+                )
+              })}
             </div>
           </AnimatedSection>
         </div>
