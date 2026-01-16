@@ -13,6 +13,7 @@ import { Transformations } from '@/pages/Transformations'
 import { Privacy } from '@/pages/Privacy'
 import { CookiePolicy } from '@/pages/CookiePolicy'
 import { OfferSecret } from '@/pages/OfferSecret'
+import { NotFound } from '@/pages/NotFound'
 
 /**
  * Main App Component
@@ -58,8 +59,9 @@ function App() {
             <Route path="/offerta-bst-crew-2026" element={<OfferSecret />} />
 
 
-            {/* 404 - In futuro creare pagina custom */}
-            <Route path="*" element={<Home />} />
+               {/* 404 - Pagina non trovata */}
+            <Route path="*" element={<NotFound />} />
+         
           </Routes>
         </Layout>
       </Router>
