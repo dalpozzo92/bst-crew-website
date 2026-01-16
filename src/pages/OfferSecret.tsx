@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle2, XCircle, Clock, Target, TrendingUp, Zap, Users, BookOpen, Brain, Dumbbell, LineChart, MessageCircle, Calendar, FileText, Video, Award } from 'lucide-react'
+import { ArrowRight, CheckCircle2, XCircle, Target, TrendingUp, Zap, BookOpen, Brain, LineChart, FileText, Video, Award } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
