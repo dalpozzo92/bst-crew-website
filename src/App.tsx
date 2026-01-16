@@ -12,6 +12,7 @@ import { FAQ } from '@/pages/FAQ'
 import { Transformations } from '@/pages/Transformations'
 import { Privacy } from '@/pages/Privacy'
 import { CookiePolicy } from '@/pages/CookiePolicy'
+import { OfferSecret } from '@/pages/OfferSecret'
 
 /**
  * Main App Component
@@ -53,6 +54,9 @@ function App() {
             <Route path="/trasformazioni" element={<Transformations />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
+
+            <Route path="/offerta-bst-crew-2026" element={<OfferSecret />} />
+
 
             {/* 404 - In futuro creare pagina custom */}
             <Route path="*" element={<Home />} />
