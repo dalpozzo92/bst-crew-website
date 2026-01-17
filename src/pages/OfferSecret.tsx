@@ -120,7 +120,7 @@ export function OfferSecret() {
       {/* Meta tag per NON indicizzare */}
       <Helmet>
         <meta name="robots" content="noindex, nofollow" />
-        <title>Offerta Speciale BST Crew 2024</title>
+        <title>Offerta Speciale BST Crew 2026</title>
       </Helmet>
 
       {/* Hero Section */}
