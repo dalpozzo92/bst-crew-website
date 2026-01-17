@@ -17,102 +17,152 @@ import { Helmet } from 'react-helmet-async'
  * URL: /offerta-bst-crew-2024
  */
 
-interface PricingTier {
-  name: string
-  color: string
-  duration3: {
-    oldPrice: string
-    newPrice: string
-    savings: string
-  }
-  duration6: {
-    value: string
-    oldPrice: string
-    newPrice: string
-    savings: string
-  }
-  totalSavings: string
-}
-
-const pricingTiers: PricingTier[] = [
-  {
-    name: 'BST Smart',
-    color: 'from-orange-500 to-orange-600',
-    duration3: {
-      oldPrice: '215€',
-      newPrice: '149€',
-      savings: '66€'
-    },
-    duration6: {
-      value: '380€',
-      oldPrice: '298€',
-      newPrice: '249€',
-      savings: '131€'
-    },
-    totalSavings: '131€'
-  },
-  {
-    name: 'BST Hybrid',
-    color: 'from-purple-500 to-pink-600',
-    duration3: {
-      oldPrice: '425€',
-      newPrice: '249€',
-      savings: '176€'
-    },
-    duration6: {
-        value: '800€',
-      oldPrice: '498€',
-      newPrice: '449€',
-      savings: '351€'
-    },
-    totalSavings: '351€'
-  },
-  {
-    name: 'BST Elite',
-    color: 'from-cyan-500 to-blue-600',
-    duration3: {
-      oldPrice: '587€',
-      newPrice: '349€',
-      savings: '238€'
-    },
-    duration6: {
-        value: '1134€',
-      oldPrice: '648€',
-      newPrice: '549€',
-      savings: '575€'
-    },
-    totalSavings: '575€'
-  }
-]
-
 interface ComparisonFeature {
   name: string
   smart: boolean | string
   hybrid: boolean | string
   elite: boolean | string
-  value?: string
+  value: number // Valore in euro
+  frequency: 'once' | 'monthly' | 'yearly' // Frequenza del costo
 }
 
+// Definizione features con valori numerici
 const comparisonFeatures: ComparisonFeature[] = [
-  { name: 'App BST', smart: true, hybrid: true, elite: true, value: '150€/anno' },
-  { name: 'Programma BST personalizzato adattivo', smart: true, hybrid: true, elite: true, value: '200€/anno' },
-  { name: 'Sessioni Personal (12 sett.)', smart: false, hybrid: '2 Ore', elite: '2 Ore', value: '60€/ora' },
-  { name: 'Sessioni Personal (24 sett.)', smart: false, hybrid: '4 Ore', elite: '4 Ore', value: '60€/ora' },
-  { name: 'BST Muscle Mapping(Test)', smart: false, hybrid: 'Light', elite: 'Full', value: '60€' },
-  { name: 'Algoritmo Progressioni & Stalli', smart: true, hybrid: true, elite: true, value: '160€/anno' },
-  { name: 'Tracking Storico & Grafici', smart: true, hybrid: true, elite: true, value: '80€/anno' },
-  { name: 'Video Analisi Biomeccanica', smart: false, hybrid: '5 Video/mese', elite: 'Illimitata', value: '200€/anno' },
-  { name: 'Supporto Chat', smart: false, hybrid: true, elite: true, value: '100€/anno' },
-  { name: 'Modifiche ai Programmi', smart: false, hybrid: 'Mensili', elite: 'Illimitata', value: '120€/anno' },
-  { name: 'Check-In', smart: false, hybrid: '6 Settimane', elite: '2 Sett', value: '80€' },
-  { name: 'Check Tecnico in Palestra (12 sett.)', smart: false, hybrid: false, elite: '1 Ora', value: '60€/ora' },
-  { name: 'Check Tecnico in Palestra (24 sett.)', smart: false, hybrid: false, elite: '2 Ore', value: '60€/ora' },
-  { name: 'Il Libro BST (Metodo/Nutriz.)', smart: false, hybrid: false, elite: true, value: '49€' },
-  { name: 'Masterclass Nutrizione', smart: false, hybrid: false, elite: '1 Ora', value: '60€/ora' },
-  { name: 'Guida Nutrizionale Scientifica', smart: false, hybrid: false, elite: true, value: '200€/anno' },
-  { name: 'Attestato Ufficiale BST & Report finale', smart: false, hybrid: false, elite: true, value: 'Gratuito' },
-  { name: 'Rinnovo a prezzo Agevolato (12 sett.)', smart: false, hybrid: false, elite: true, value: 'Esclusivo' }
+  { name: 'App BST', smart: true, hybrid: true, elite: true, value: 150, frequency: 'yearly' },
+  { name: 'Programma BST personalizzato adattivo', smart: true, hybrid: true, elite: true, value: 280, frequency: 'yearly' },
+  { name: 'Sessioni Personal (12 sett.)', smart: false, hybrid: '2 Ore', elite: '2 Ore', value: 120, frequency: 'once' }, // 2 ore x 60€
+  { name: 'Sessioni Personal (24 sett.)', smart: false, hybrid: '4 Ore', elite: '4 Ore', value: 240, frequency: 'once' }, // 4 ore x 60€
+  { name: 'BST Muscle Mapping(Test)', smart: false, hybrid: 'Light', elite: 'Full', value: 60, frequency: 'once' },
+  { name: 'Algoritmo Progressioni & Stalli', smart: true, hybrid: true, elite: true, value: 160, frequency: 'yearly' },
+  { name: 'Tracking, Revisione storico & Grafici', smart: true, hybrid: true, elite: true, value: 100, frequency: 'yearly' },
+  { name: 'Video Analisi Biomeccanica', smart: false, hybrid: '5 Video/mese', elite: 'Illimitata', value: 200, frequency: 'yearly' },
+  { name: 'Supporto Chat', smart: false, hybrid: true, elite: true, value: 100, frequency: 'yearly' },
+  { name: 'Modifiche ai Programmi', smart: false, hybrid: 'Mensili', elite: 'Illimitata', value: 120, frequency: 'yearly' },
+  { name: 'Check-In', smart: false, hybrid: '6 Settimane', elite: '2 Sett', value: 80, frequency: 'once' },
+  { name: 'Check Tecnico in Palestra (12 sett.)', smart: false, hybrid: false, elite: '1 Ora', value: 60, frequency: 'once' },
+  { name: 'Check Tecnico in Palestra (24 sett.)', smart: false, hybrid: false, elite: '2 Ore', value: 120, frequency: 'once' },
+  { name: 'Il Libro BST (Metodo/Nutriz.)', smart: false, hybrid: false, elite: true, value: 49, frequency: 'once' },
+  { name: 'Masterclass Nutrizione', smart: false, hybrid: false, elite: '1 Ora', value: 60, frequency: 'once' },
+  { name: 'Guida Nutrizionale Scientifica', smart: false, hybrid: false, elite: true, value: 100, frequency: 'yearly' },
+  { name: 'Diario Alimentare & Revisione Pasti', smart: false, hybrid: false, elite: 'Monitoraggio Giornaliero', value: 100, frequency: 'yearly' },
+  { name: 'Check Foto & Analisi Punti Carenti', smart: false, hybrid: false, elite: 'Mensile', value: 80, frequency: 'yearly' },
+  { name: 'Monitoraggio Peso & Circonferenze', smart: false, hybrid: 'Solo Peso', elite: 'Andamento Completo', value: 80, frequency: 'yearly' },
+  { name: 'Attestato Ufficiale BST & Report finale', smart: false, hybrid: false, elite: true, value: 0, frequency: 'once' },
+  { name: 'Rinnovo a prezzo Agevolato (12 sett.)', smart: false, hybrid: false, elite: true, value: 0, frequency: 'once' }
 ]
+
+// Funzione per calcolare il valore totale di un piano
+function calculatePlanValue(plan: 'smart' | 'hybrid' | 'elite', months: 3 | 6): number {
+  let total = 0
+  const is24Weeks = months === 6
+
+  comparisonFeatures.forEach(feature => {
+    const planValue = plan === 'smart' ? feature.smart : plan === 'hybrid' ? feature.hybrid : feature.elite
+    
+    // Solo se la feature è inclusa (true o string diversa da false)
+    if (planValue !== false) {
+      if (feature.frequency === 'yearly') {
+        // Costi annuali: proporzionali ai mesi
+        total += (feature.value / 12) * months
+      } else if (feature.frequency === 'monthly') {
+        // Costi mensili
+        total += feature.value * months
+      } else if (feature.frequency === 'once') {
+        // Costi una tantum
+        // Alcuni costi cambiano tra 12 e 24 settimane
+        if (feature.name.includes('24 sett') && !is24Weeks) {
+          // Skip feature da 24 settimane se siamo a 3 mesi
+          return
+        } else if (feature.name.includes('12 sett') && is24Weeks) {
+          // Skip feature da 12 settimane se siamo a 6 mesi
+          return
+        }
+        
+        // Per le sessioni personal, il valore è già corretto in base alle settimane
+        if (feature.name.includes('Sessioni Personal')) {
+          total += feature.value
+        } else {
+          total += feature.value
+        }
+      }
+    }
+  })
+
+  return Math.round(total)
+}
+
+// Definizione prezzi con calcoli automatici
+interface PricingTier {
+  name: string
+  color: string
+  newPrice3: number // Prezzo finale che scegli tu per 3 mesi
+  newPrice6: number // Prezzo finale che scegli tu per 6 mesi
+}
+
+const pricingConfig: PricingTier[] = [
+  {
+    name: 'BST Smart',
+    color: 'from-orange-500 to-orange-600',
+    newPrice3: 149,
+    newPrice6: 249
+  },
+  {
+    name: 'BST Hybrid',
+    color: 'from-purple-500 to-pink-600',
+    newPrice3: 249,
+    newPrice6: 449
+  },
+  {
+    name: 'BST Elite',
+    color: 'from-cyan-500 to-blue-600',
+    newPrice3: 349,
+    newPrice6: 549
+  }
+]
+
+// Calcolo automatico dei valori
+const pricingTiers = pricingConfig.map((config, index) => {
+  const planType: 'smart' | 'hybrid' | 'elite' = 
+    index === 0 ? 'smart' : index === 1 ? 'hybrid' : 'elite'
+  
+  const value3 = calculatePlanValue(planType, 3)
+  const value6 = calculatePlanValue(planType, 6)
+  const oldPrice6 = config.newPrice3 * 2
+  const savings3 = value3 - config.newPrice3
+  const savings6 = value6 - config.newPrice6
+
+  return {
+    name: config.name,
+    color: config.color,
+    duration3: {
+      value: `${value3}€`,
+      newPrice: `${config.newPrice3}€`,
+      savings: `${savings3}€`
+    },
+    duration6: {
+      value: `${value6}€`,
+      oldPrice: `${oldPrice6}€`,
+      newPrice: `${config.newPrice6}€`,
+      savings: `${savings6}€`
+    },
+    totalSavings: `${savings6}€`,
+    // Valori numerici per la tabella finale
+    value6Numeric: value6
+  }
+})
+
+// Formatta features per display nella tabella
+const comparisonFeaturesDisplay = comparisonFeatures.map(feature => ({
+  name: feature.name,
+  smart: feature.smart,
+  hybrid: feature.hybrid,
+  elite: feature.elite,
+  value: feature.frequency === 'yearly' 
+    ? `${feature.value}€/anno` 
+    : feature.frequency === 'monthly'
+    ? `${feature.value}€/mese`
+    : `${feature.value}€`
+}))
 
 export function OfferSecret() {
   return (
@@ -120,7 +170,7 @@ export function OfferSecret() {
       {/* Meta tag per NON indicizzare */}
       <Helmet>
         <meta name="robots" content="noindex, nofollow" />
-        <title>Offerta Speciale BST Crew 2026</title>
+        <title>Offerta Speciale BST Crew 2024</title>
       </Helmet>
 
       {/* Hero Section */}
@@ -198,7 +248,6 @@ export function OfferSecret() {
           </div>
         </div>
       </section>
-
 
       {/* Software Section */}
       <section className="section-padding bg-gradient-to-b from-dark-800/50 to-transparent">
@@ -501,7 +550,6 @@ export function OfferSecret() {
         </div>
       </section>
 
-
       {/* Comparison Table */}
       <section className="section-padding">
         <div className="container-custom">
@@ -545,7 +593,7 @@ export function OfferSecret() {
                   </tr>
                 </thead>
                 <tbody>
-                  {comparisonFeatures.map((feature, index) => (
+                  {comparisonFeaturesDisplay.map((feature, index) => (
                     <tr key={index} className={index % 2 === 0 ? 'bg-dark-900/50' : 'bg-dark-800/30'}>
                       <td className="p-4 text-gray-300">{feature.name}</td>
                       <td className="p-4 text-center">
@@ -586,9 +634,9 @@ export function OfferSecret() {
                   ))}
                   <tr className="bg-dark-900 font-bold text-lg">
                     <td className="p-4 text-white">VALORE 6 MESI</td>
-                    <td className="p-4 text-center text-primary-500">330€</td>
-                    <td className="p-4 text-center text-primary-500">750€</td>
-                    <td className="p-4 text-center text-primary-500">1074€</td>
+                    <td className="p-4 text-center text-primary-500">{pricingTiers[0].value6Numeric}€</td>
+                    <td className="p-4 text-center text-primary-500">{pricingTiers[1].value6Numeric}€</td>
+                    <td className="p-4 text-center text-primary-500">{pricingTiers[2].value6Numeric}€</td>
                     <td className="p-4"></td>
                   </tr>
                 </tbody>
@@ -612,7 +660,7 @@ export function OfferSecret() {
                       {tier.name}
                     </div>
                     <div className="space-y-3">
-                      {comparisonFeatures.map((feature) => {
+                      {comparisonFeaturesDisplay.map((feature) => {
                         const value = index === 0 ? feature.smart : index === 1 ? feature.hybrid : feature.elite
                         return (
                           <div key={feature.name} className="flex items-start justify-between py-3 border-b border-white/[0.08] gap-4">
@@ -681,35 +729,51 @@ export function OfferSecret() {
                       {tier.name}
                     </div>
 
-                    {/* 3 Mesi */}
+                    {/* 3 MESI */}
                     <div className="mb-6 pb-6 border-b border-white/[0.08]">
                       <p className="text-sm text-gray-400 mb-2">3 MESI</p>
+
                       <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-sm text-gray-500">Valore</span>
-                        <span className="text-xl text-red-400 line-through">{tier.duration3.oldPrice}</span>
+                        <span className="text-sm text-gray-400">Valore Percorso</span>
+                        <span className="relative text-xl px-1 text-gray-400">
+                          <span className="absolute left-0 top-1/2 w-full h-[1.5px] bg-gray-400/40 rotate-[-8deg]"></span>
+                          {tier.duration3.value}
+                        </span>
                       </div>
+
                       <div className="flex items-baseline gap-2">
-                        <span className="text-sm text-gray-400">Reale</span>
-                        <span className="text-3xl font-bold text-primary-500">{tier.duration3.newPrice}</span>
+                        <span className="text-sm text-gray-400">Prezzo standard</span>
+                        <span className="text-3xl font-bold text-primary-500">
+                          {tier.duration3.newPrice}
+                        </span>
                       </div>
                     </div>
 
-                    {/* 6 Mesi */}
+                    {/* 6 MESI */}
                     <div className="mb-6 pb-6 border-b border-white/[0.08]">
                       <p className="text-sm text-gray-400 mb-2">6 MESI</p>
+
                       <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-sm text-gray-500">Valore</span>
-                        <span className="text-xl text-red-400 line-through">{tier.duration6.value}</span>
+                        <span className="text-sm text-gray-400">Valore Percorso</span>
+                        <span className="relative text-xl px-1 text-gray-400">
+                          <span className="absolute left-0 top-1/2 w-full h-[1.5px] bg-gray-400/50 rotate-[-8deg]"></span>
+                          {tier.duration6.value}
+                        </span>
                       </div>
-                      <div className="mb-2">
-                        <div className="flex items-baseline gap-2 mb-1">
-                          <span className="text-sm text-gray-400">Offerta</span>
-                          <span className="text-xl text-gray-500 line-through">{tier.duration6.oldPrice}</span>
-                        </div>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-sm text-gray-400">Reale</span>
-                          <span className="text-3xl font-bold text-primary-500">{tier.duration6.newPrice}</span>
-                        </div>
+
+                      <div className="flex items-baseline gap-2 mb-2">
+                        <span className="text-sm text-red-400 font-medium">Prezzo standard</span>
+                        <span className="relative text-xl px-1 text-gray-400">
+                          <span className="absolute left-0 top-1/2 w-full h-[1.5px] bg-red-500/50 rotate-[-12deg]"></span>
+                          {tier.duration6.oldPrice}
+                        </span>
+                      </div>
+
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-sm text-gray-400">Prezzo scontato</span>
+                        <span className="text-3xl font-bold text-primary-500">
+                          {tier.duration6.newPrice}
+                        </span>
                       </div>
                     </div>
 
@@ -808,7 +872,6 @@ export function OfferSecret() {
           </motion.div>
         </div>
       </section>
-
 
       {/* Prossimi Passi Section */}
       <section className="section-padding bg-gradient-to-b from-dark-800/50 to-transparent">
