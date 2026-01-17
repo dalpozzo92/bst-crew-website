@@ -39,49 +39,49 @@ const pricingTiers: PricingTier[] = [
     name: 'BST Smart',
     color: 'from-orange-500 to-orange-600',
     duration3: {
-      oldPrice: '165€',
+      oldPrice: '215€',
       newPrice: '149€',
-      savings: '16€'
+      savings: '66€'
     },
     duration6: {
-      value: '330€',
+      value: '380€',
       oldPrice: '298€',
       newPrice: '249€',
-      savings: '81€'
+      savings: '131€'
     },
-    totalSavings: '81€'
+    totalSavings: '131€'
   },
   {
     name: 'BST Hybrid',
     color: 'from-purple-500 to-pink-600',
     duration3: {
-      oldPrice: '375€',
+      oldPrice: '425€',
       newPrice: '249€',
-      savings: '126€'
+      savings: '176€'
     },
     duration6: {
-        value: '750€',
+        value: '800€',
       oldPrice: '498€',
       newPrice: '449€',
-      savings: '301€'
+      savings: '351€'
     },
-    totalSavings: '301€'
+    totalSavings: '351€'
   },
   {
     name: 'BST Elite',
     color: 'from-cyan-500 to-blue-600',
     duration3: {
-      oldPrice: '537€',
+      oldPrice: '587€',
       newPrice: '349€',
-      savings: '188€'
+      savings: '238€'
     },
     duration6: {
-        value: '1074€',
+        value: '1134€',
       oldPrice: '648€',
       newPrice: '549€',
-      savings: '525€'
+      savings: '575€'
     },
-    totalSavings: '525€'
+    totalSavings: '575€'
   }
 ]
 
@@ -95,6 +95,7 @@ interface ComparisonFeature {
 
 const comparisonFeatures: ComparisonFeature[] = [
   { name: 'App BST', smart: true, hybrid: true, elite: true, value: '150€/anno' },
+  { name: 'Programma BST personalizzato adattivo', smart: true, hybrid: true, elite: true, value: '200€/anno' },
   { name: 'Sessioni Personal (12 sett.)', smart: false, hybrid: '2 Ore', elite: '2 Ore', value: '60€/ora' },
   { name: 'Sessioni Personal (24 sett.)', smart: false, hybrid: '4 Ore', elite: '4 Ore', value: '60€/ora' },
   { name: 'BST Muscle Mapping(Test)', smart: false, hybrid: 'Light', elite: 'Full', value: '60€' },
@@ -434,6 +435,9 @@ export function OfferSecret() {
                       <p className="text-gray-300 leading-relaxed">
                         Entriamo nel vivo con il monitoraggio scientifico tramite il mio software.
                       </p>
+                      <p className="text-gray-300 leading-relaxed">
+                        Ti guido attraverso le lezioni personal nella palestra in cui collaboro, correggendo ogni dettaglio per massimizzare i risultati.
+                       </p>
                     </div>
                   </div>
                 </CardContent>
