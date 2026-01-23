@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Laptop, TrendingUp, MessageCircle, Bell, BarChart3, Activity  } from 'lucide-react'
+import { ArrowRight, Laptop, TrendingUp, Database, Bell, BarChart3, Activity  } from 'lucide-react'
 import { SEO } from '@/components/common/SEO'
 import { Hero } from '@/components/sections/Hero'
 import { WhyChooseMe } from '@/components/sections/WhyChooseMe'
@@ -150,19 +150,19 @@ export function Home() {
                   <CardContent className="p-8">
                     <div className="flex items-start space-x-4 mb-4">
                       <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <MessageCircle className="w-6 h-6 text-primary-500" />
+                        <Database className="w-6 h-6 text-primary-500" />
                       </div>
                       <div>
                         <h3 className="text-2xl font-display font-bold text-white mb-2">
-                          Chat Diretta con il Coach
+                          Storico dati
                         </h3>
-                        <p className="text-gray-400 text-sm mb-4">Supporto continuo</p>
+                        <p className="text-gray-400 text-sm mb-4">Sempre un passo avanti</p>
                       </div>
                     </div>
                     <p className="text-gray-300 leading-relaxed">
-                      <span className="text-white font-semibold">Comunicazione diretta integrata</span> nel
-                      software. Domande, dubbi, feedback: sono sempre a portata di messaggio per guidarti
-                      in ogni fase del percorso.
+                      Ogni programma, ogni esercizio, ogni serie, ogni ripetizione viene tracciata e salvata, così
+                      da poter analizzare a fondo il tuo percorso nel tempo. Questo storico dettagliato mi permette
+                      di adattare continuamente il tuo allenamento e controllare ciò che è stato fatto nel tempo per capire quello che funziona meglio per te.
                     </p>
                   </CardContent>
                 </Card>

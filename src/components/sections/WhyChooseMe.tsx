@@ -4,23 +4,27 @@ import { ScrollFloat } from '@/components/common/ScrollFloat'
 
 const benefits = [
   {
-    title: 'Approccio Scientifico Personalizzato',
-    description: 'Programmi evidence-based costruiti sulle tue esigenze e obiettivi specifici. Niente allenamenti generici, solo metodi testati e personalizzati.',
+    title: 'Sicurezza e Personalizzazione',
+    hook: 'Ti sei infortunato a causa di esercizi sbagliati?',
+    description: 'La personalizzazione è la chiave. Analizzo la tua biomeccanica per adattare ogni movimento alla tua struttura, non il contrario. Niente più dolori, solo crescita.',
     icon: Brain
   },
   {
-    title: 'Specializzazione Estetica',
-    description: 'Focus su ipertrofia muscolare, definizione e ricomposizione corporea per risultati visibili. Il tuo fisico è il mio obiettivo.',
+    title: 'Basta Stalli Infiniti',
+    hook: 'Ti alleni da mesi ma lo specchio non cambia?',
+    description: 'Il "copia-incolla" non funziona. Il mio approccio si focalizza sulla ricomposizione corporea e l’ipertrofia estetica attraverso una programmazione scientifica che evolve con te.',
     icon: Trophy
   },
   {
     title: 'Flessibilità Totale',
-    description: 'Allenamenti in palestra a Pergine Valsugana o coaching online ovunque. Scegli la modalità più adatta al tuo stile di vita.',
+    hook: 'Pensi di non avere abbastanza tempo per la palestra?',
+    description: 'Ottimizziamo ogni minuto. Che sia coaching online o in presenza a Pergine Valsugana, costruisco un piano che si incastra perfettamente nella tua vita frenetica con un minimo di 3 ore settimanali!.',
     icon: Sparkles
   },
   {
-    title: 'Risultati Misurabili',
-    description: 'Monitoraggio costante dei progressi con metodi scientifici e feedback continuo. Ogni mese vediamo quanto ti avvicini al tuo obiettivo.',
+    title: 'Chiarezza e Metodo',
+    hook: 'Ti senti perso tra mille diete e programmi diversi?',
+    description: 'Smettiamo di tirare a indovinare. Monitoriamo dati e progressi con feedback costanti: saprai sempre esattamente cosa stai facendo e perché lo stai facendo.',
     icon: LineChart
   }
 ]
@@ -62,17 +66,24 @@ export function WhyChooseMe() {
                 animation="fadeInUp"
                 delay={index * 0.1}
               >
-                <div className="bg-dark-900 border border-white/[0.08] rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300 h-full">
+                <div className="bg-dark-900 border border-white/[0.08] rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 h-full group hover:border-primary-500/30">
                   {/* Icon */}
-                  <div className="w-16 h-16 bg-primary-500/10 rounded-2xl flex items-center justify-center mb-6">
-                    <Icon className="w-8 h-8 text-primary-500" />
+                  <div className="w-14 h-14 bg-primary-500/10 rounded-xl flex items-center justify-center mb-6">
+                    <Icon className="w-7 h-7 text-primary-500" />
                   </div>
 
-                  {/* Content */}
-                  <h3 className="text-xl font-display font-bold text-white mb-3">
+                  {/* Title */}
+                  <h3 className="text-xl font-display font-bold text-white mb-4">
                     {benefit.title}
                   </h3>
-                  <p className="text-gray-400 leading-relaxed">
+
+                  {/* Gancio (Hook) - Stile Distinto */}
+                  <p className="text-primary-400 font-medium italic mb-3 leading-snug">
+                    "{benefit.hook}"
+                  </p>
+
+                  {/* Descrizione (Soluzione) */}
+                  <p className="text-gray-400 leading-relaxed text-sm">
                     {benefit.description}
                   </p>
                 </div>
@@ -90,10 +101,10 @@ export function WhyChooseMe() {
               </h3>
               <p className="text-lg text-gray-400 leading-relaxed">
                 Ogni corpo è unico, ogni obiettivo è diverso e ogni vita ha le sue esigenze.
-Per questo creo percorsi totalmente personalizzati, progettati per adattarsi a te, non il contrario.
+                Per questo creo percorsi totalmente personalizzati, progettati per adattarsi a te, non il contrario.
 
-Che il tuo obiettivo sia aumentare la massa muscolare, perdere peso o ricomporre il tuo fisico, 
-lavoreremo insieme per costruire il percorso perfetto per raggiungere i tuoi risultati in soli 6 mesi.
+                Che il tuo obiettivo sia aumentare la massa muscolare, perdere peso o ricomporre il tuo fisico,
+                lavoreremo insieme per costruire il percorso perfetto per raggiungere i tuoi risultati in soli 6 mesi.
               </p>
             </div>
           </div>

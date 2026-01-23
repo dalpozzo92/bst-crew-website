@@ -61,7 +61,7 @@ const phases: Phase[] = [
     features: [
       'Call iniziale (45-60 min): Analisi profonda del tuo storico e dei tuoi obiettivi per non lasciare nulla al caso.',
       'Questionario strutturato su allenamento, stile di vita e abitudini',
-      'Analisi Biomeccanica Individuale: Valutazione della tua struttura e mobilità per un programma cucito sulla tua anatomia',
+      'Maping Analisi Biomeccanica: Valutazione della tua struttura, mobilità, intensità dell\'allenamento per un programma cucito sulla tua anatomia',
       'DNA Tecnico (2 Sessioni in palestra): 2 ore dal vivo per settare la tua tecnica ed eliminare ogni rischio di infortunio',
       'Il Toolkit BST: Accesso immediato al Libro BST (Nutrizione) e alla Guida Allenamento per capire la scienza dietro il tuo sforzo.',
       'Masterclass Nutrizionale (1 ora): Formazione personale per renderti consapevole e autonomo nella gestione dei tuoi macronutrienti.',
@@ -100,9 +100,8 @@ const phases: Phase[] = [
     color: 'text-emerald-500',
     gradient: 'from-emerald-500/20 to-emerald-600/20',
     features: [
-      'Programmazione di Secondo Ciclo: Nuovo stimolo avanzato basato sui dati reali raccolti nei primi 3 mesi.',
+      'Programmazione Secondo Ciclo: Nuovo stimolo avanzato basato sui dati reali raccolti nei primi 3 mesi.',
       'Check strutturato ogni 6 settimane (1h) per monitoraggio e ottimizzazione',
-      'Verso l’Autonomia: Ti insegniamo a leggere i feedback del tuo corpo come farebbe un professionista.',
       'Focus crescente sull\'autonomia: impari a gestirti in modo consapevole',
       'Focus High-Performance: Perfezionamento degli schemi motori complessi per spremere ogni fibra muscolare.',
       'Strategie mentali per mantenere motivazione e disciplina alta'

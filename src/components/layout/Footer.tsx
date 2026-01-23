@@ -18,7 +18,7 @@ import { getAssetPath } from '@/lib/assets'
 export function Footer() {
   const currentYear = new Date().getFullYear()
   const INSTAGRAM_URL = import.meta.env.VITE_INSTAGRAM_URL || 'https://instagram.com/bstcrew'
-  const EMAIL = import.meta.env.VITE_EMAIL || 'info@bstcrew.com'
+  const EMAIL = import.meta.env.VITE_EMAIL || 'dalpozzo92@gmail.com'
 
   return (
     <footer className="bg-dark-900 text-gray-300">
