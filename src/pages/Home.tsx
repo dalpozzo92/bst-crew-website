@@ -13,6 +13,7 @@ import { seoConfig } from '@/lib/seo-config'
 import { Card, CardContent } from '@/components/ui/card'
 import { getLocalBusinessSchema, generateSchemaScript } from '@/lib/schema-org'
 import { StickyScroll, StickyScrollItem } from '@/components/common/StickyScroll'
+import { GoogleReviews } from '../components/GoogleReviews'
 
 /**
  * Home Page
@@ -210,6 +211,8 @@ export function Home() {
 
       {/* Book Section */}
       <BookSection />
+
+      <GoogleReviews />
 
       {/* Instagram Section */}
       <InstagramSection />

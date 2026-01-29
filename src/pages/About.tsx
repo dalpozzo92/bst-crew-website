@@ -9,7 +9,7 @@ import { getPersonSchema, generateSchemaScript } from '@/lib/schema-org'
 import { getAssetPath } from '@/lib/assets'
 import { StickyScroll, StickyScrollItem } from '@/components/common/StickyScroll'
 import { ScrollFloat } from '@/components/common/ScrollFloat'
-
+import { GoogleReviews } from '../components/GoogleReviews'
 // ... existing code ...
 
 export function About() {
@@ -183,6 +183,12 @@ export function About() {
                       <p className="text-gray-300 leading-relaxed">
                         Biomeccanica avanzata – <span className="text-white font-medium">Ingegneria Anabolica di Noha Rabasco</span>
                       </p>
+                    </div> 
+                    <div className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-300 leading-relaxed">
+                        Master in Biomeccanica – <span className="text-white font-medium">Eleven Academy</span>
+                      </p>
                     </div>
                     <div className="flex gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary-500/60 mt-2 flex-shrink-0"></div>
@@ -330,6 +336,9 @@ export function About() {
           </AnimatedSection>
         </div>
       </section>
+
+            <GoogleReviews />
+      
 
       {/* CTA Section */}
       <section className="section-padding">
